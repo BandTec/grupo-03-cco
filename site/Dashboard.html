@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!--Chart do Gráfico Mensal-->
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <!-- FOLHA DE ESTILO NOSSA-->
+    <link rel="stylesheet" href="src/css/style.css">
+    <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vaibhav111tandon/vov.css@latest/vov.css ">
+    <!--Icone da aba [ guia ] do navegador-->
+    <link rel="shortcut icon" href="src/img/icon-pneu.png" type="image/x-icon">
+    <title>Pneu - Dashboard</title>
+</head>
+
+<body>
+    <!-- INICIO DO HEADER [CABEÇALHO] -  ABAIXO FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+    <header>
+        <nav class="container">
+            <h1 class="middle">
+                <img src="src/img/icon-pneu.png" alt="Icone de" class="icon-header">
+                Pneu
+            </h1>
+            <ul class="middle">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="sobre.html">Sobre</a>
+                </li>
+                <li>
+                    <a href="projeto.html">Projeto</a>
+                </li>
+                <li>
+                    <a href="equipe.html">Equipe</a>
+                </li>
+                <li>
+                    <a href="login.html">Saída</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class='barra_botoes'>
+        <select onclick="">
+            <option value="0">Trechos</option>
+            <option value="1">Trecho 1</option>
+            <option value="2">Trecho 2</option>
+            <option value="3">Trecho 3</option>
+            <option value="4">Trecho 4</option>
+            <option value="5">Trecho 5</option>
+        </select>
+
+        <div class='botoes_direita'>
+            <button>Busca</button>
+            <button>Seus Dados</button>
+        </div>
+    </div>
+    <div class='corpo_graficos'>
+        <div class=tempo_real>
+            <canvas id="graficoIRT"></canvas>
+        </div>
+
+        <div class="tempo_semanal">
+            <canvas id="quadro"></canvas>
+        </div>
+
+        <div class="tempo_mensal">
+            <canvas id="grafMensal"></canvas>
+        </div>
+    </div>
+
+
+    <footer>
+        <p class="container">
+            &copy;2020 - Projeto<span class="highlight" role="text">Pneu</span>. Desenvolvido com
+            <span class="highlight" role="text"> ❤</span> por
+            <span class="highlight" role="text"> { DuckDevelopers } </span>
+        </p>
+    </footer>
+    <!-- FIM DO FOOTER [RODPÉ] -->
+
+    <!-- ABAIXO DESTE COMENTÁRIO FICARÁ AS CHAMADAS DE SCRIPTS JS -->
+    <!-- Script javascript nosso -->
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>
+
+<script>
+    var veiculo = [243142, 218148, 202224, 231035, 212753, 211740, 301262, 211058, 220972, 211010, 221221, 251024];
+
+var grafM = { 
+    type: 'bar',
+    data: {
+        labels: ['Jan/19','Fev/19','Mar/19','Abr/19','Mai/19','Jun/19','Jul/19','Ago/19','Set/19','Out/19','Nov/19','Dez/19'],
+        datasets: [{
+            label: 'Quantidade de Veículos',
+            backgroundColor: "#976DD0",
+            borderColor: "#976DD0",
+            data: [],
+            fill: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Gráfico Mensal (2019)'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Meses'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Veículos'
+                }
+            }]
+        }
+    }
+};
+
+function contabilizar()
+{
+    var contador = 0;
+
+    while(contador < veiculo.length){
+        //Exibe no gráfico a informação da POSIÇÃO 0
+        grafM.data.datasets[0].data.push(veiculo[contador]);
+        contador ++;
+    }
+    
+    var canvasDaPage = document.getElementById('grafMensal').getContext('2d');
+    window.graficoLinha = new Chart(canvasDaPage, grafM);
+
+}
+
+window.onload = contabilizar();
+
+var informacao = [25000, 20000, 35000, 1000, 45000];
+
+var grafSem = {
+
+    type: 'bar',
+    data: {
+        labels: ['01/04', '05/04', '14/04', '19/04', '30/04'],
+        datasets: [{
+            label: 'Quantidade de Veículos',
+            backgroundColor: "#976DD0",
+            borderColor: "#976DD0",
+            data: [],
+            fill: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Gráfico Semanal do mês de abril'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Semanas'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Quantidade de Veículos'
+                }
+            }]
+        }
+    }
+};
+
+function exibirnografico()
+ {
+
+
+    contador = 0;
+
+    while (contador < informacao.length) {
+        //exibe no grafico a informação posiçao 0//
+        grafSem.data.datasets[0].data.push(informacao[contador]);
+        contador++;
+    }
+    var canvasdapagina = document.getElementById('quadro').getContext('2d');
+
+    window.graficoLinha = new Chart(canvasdapagina, grafSem);
+}
+window.onload = exibirnografico();
+
+
+var numero = [25, 10, 35, 22, 18, 25, 10, 35, 22, 18, 25, 10, 35, 9, 18, 14, 10, 35, 22, 18, 25, 10, 25, 22];
+
+    var graficotemporeal = {
+		type: 'bar',
+		data: {
+			labels: ['00:00','01:00','02:00','03:00' ,'04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00','15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+			datasets: [{
+				label: 'Quantidade de Veículos',
+				backgroundColor: "#976DD0",
+				borderColor: "#976DD0",
+				data: [],
+				fill: false,
+			}]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: 'Gráfico em tempo real'
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Horário'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Quantidade de carros'
+					}
+				}]
+			}
+		}
+	};
+
+	
+   function exibirIRT(){
+       var contador = 0;
+
+       while(contador < numero.length){
+		graficotemporeal.data.datasets[0].data.push(numero[contador]);
+           contador++;
+       }
+       var uau = document.getElementById('graficoIRT').getContext('2d');
+       window.graficoLinha = new Chart(uau, graficotemporeal); 
+   }
+   window.onload = exibirIRT(); 
+
+</script>
