@@ -36,8 +36,8 @@ create table rodovia(
 
     nomeRodovia varchar (50),
 
-   fkCliente int,
-   foreign key(fkCliente) references cliente(idCliente)
+    fkCliente int,
+    foreign key(fkCliente) references cliente(idCliente)
 
 );
 
@@ -61,7 +61,7 @@ create table Ponto(
 
 create table Registro(
 
-     primary key (idRegistro, fkPonto),
+    primary key (idRegistro, fkPonto),
 
     idRegistro int,
     
