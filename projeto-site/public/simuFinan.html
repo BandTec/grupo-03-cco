@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- FOLHA DE ESTILO NOSSA-->
+    <link rel="stylesheet" href="src/css/style.css">
+    <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vaibhav111tandon/vov.css@latest/vov.css ">
+    <!--Icone da aba [ guia ] do navegador-->
+    <link rel="shortcut icon" href="src/img/icon-pneu.png" type="image/x-icon">
+    <title>Pneu - Simulador financeiro</title>
+</head>
+
+<body class="banner-page">
+    <!-- INICIO DO HEADER [CABEÇALHO] -  ABAIXO FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+    <header>
+        <nav class="container">
+            <h1 class="middle">
+                <img src="src/img/icon-pneu.png" alt="Icone de" class="icon-header">
+                Pneu
+            </h1>
+            <ul class="middle">
+                <li>
+                    <a class="link" href="index.html">Home</a>
+                </li>
+                <li>
+                    <a class="link" href="sobre.html">Sobre</a>
+                </li>
+                <li>
+                    <a class="link" href="projeto.html">Projeto</a>
+                </li>
+                <li>
+                    <a class="link" href="equipe.html">Equipe</a>
+                </li>
+                <li>
+                    <a class="link" href="login.html">Login</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+
+    <!-- INICIO DO MAIN-  ONDE O CONTEÚDO DA PAGINA ALTERA-->
+    
+    <main class="container height-main">
+        <!-- ESCREVA O CÓDIGO DA SUA PÁGINA AQUI 😘-->
+        <form method="dialog">
+            <label for="idManutencao">
+                Gasto mensal com manutenção<input required id="idManutencao">
+            </label>
+            <label for="idPubli">
+                Lucro atual com publicidade<input required id="idPubli">
+            </label>
+
+            <button class="btnSimulador" onclick="simu()">
+                Simulação
+            </button>
+
+            <div id="idResposta1"></div>
+            <div id="idResposta2"></div>
+            <div id="idResposta3"></div>
+            
+        </form>
+        
+    </main>
+    
+
+    
+    
+    
+    <!-- FIM DO MAIN-  ONDE O CONTEÚDO DA PAGINA ALTERA-->
+
+    <!-- INICIO DO FOOTER [RODAPÉ] -->
+    <footer>
+        <p class="container">
+            &copy;2020 - Projeto<span class="highlight" role="text">Pneu</span>. Desenvolvido com
+            <span class="highlight" role="text"> ❤</span> por
+            <span class="highlight" role="text"> { DuckDevelopers } </span>
+        </p>
+    </footer>
+    <!-- FIM DO FOOTER [RODPÉ] -->
+
+    <!-- ABAIXO DESTE COMENTÁRIO FICARÁ AS CHAMADAS DE SCRIPTS JS -->
+    <!-- Script javascript nosso -->
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>

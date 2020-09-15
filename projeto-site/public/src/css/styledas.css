@@ -1,0 +1,425 @@
+.circular-menu {
+    position: fixed;
+    bottom: 4.5rem;
+    left: 4.5rem;
+}
+
+.circular-menu .floating-btn {
+    display: block;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 #00000042;
+    color: #976dd0;
+    text-align: center;
+    line-height: 4;
+    cursor: pointer;
+    outline: 0;
+    z-index: 1;
+}
+
+.circular-menu:after {
+    display: block;
+    content: ' ';
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0.1rem;
+    left: 0.1rem;
+    z-index: -2;
+    transition: all .3s ease-in-out;
+}
+
+.circular-menu.active:after {
+    transform: scale3d(5.5, 5.5, 1);
+    transition-timing-function: cubic-bezier(.68, 1.55, .265, 1);
+}
+
+.circular-menu .items-wrapper {
+    padding: 0;
+    margin: 0;
+}
+
+.circular-menu .menu-item {
+    position: absolute;
+    bottom: 0.1em;
+    left: 0.1rem;
+    z-index: -1;
+    display: block;
+    text-decoration: none;
+    color: #976dd0;
+    font-size: 1em;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 3;
+    background-color: #976dd01a;
+    transition: transform .3s ease, background .2s ease;
+}
+
+.circular-menu .menu-item:hover {
+    color: #f8f8f8;
+}
+
+.circular-menu.circular-menu-left {
+    right: auto;
+    left: 1rem;
+}
+
+.circular-menu.circular-menu-left .floating-btn, .circular-menu.circular-menu-left:after {
+    background-color: #232323;
+}
+
+.circular-menu.circular-menu-left.active .floating-btn i {
+    transform: rotate(90deg);
+}
+
+.circular-menu.circular-menu-left.active .menu-item:nth-child(1) {
+    transform: translate3d(-1em, -7em, 0);
+}
+
+.circular-menu.circular-menu-left.active .menu-item:nth-child(2) {
+    transform: translate3d(3.5em, -6.3em, 0);
+}
+
+.circular-menu.circular-menu-left.active .menu-item:nth-child(3) {
+    transform: translate3d(6.5em, -3.2em, 0);
+}
+
+.circular-menu.circular-menu-left.active .menu-item:nth-child(4) {
+    transform: translate3d(7em, 1em, 0);
+}
+
+.text-left {
+    width: 100%;
+    margin-left: 0;
+    text-align: left;
+}
+
+.onechart, .chart-box {
+    border-bottom: 0.1rem solid #966dd083;
+    border-radius: 0.5em;
+    box-shadow: 2px 2px 10px #00000027;
+}
+
+.onechart .tempo_real {
+    width: 100%;
+    height: 540px;
+    margin: auto;
+}
+
+.bgblack {
+    background-color: #232323ec;
+}
+
+.twocharts {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.chart-box {
+    width: 50%;
+    height: 30vh;
+    margin: 20px 10px;
+    height: min-content;
+}
+
+.personalData, .preferences, .problemReports {
+    margin: 20px auto;
+    width: 50%;
+    color: #f8f8f8;
+    height: max-content;
+}
+
+.personalData input, .personalData button, .preferences select, .preferences select option, .preferences button, .problemReports input, .problemReports button, .problemReports textarea {
+    width: 98%;
+    border: 0;
+    background-color: transparent;
+    color: #976dd0;
+    padding: 10px 0px 10px 5px;
+    margin: 5px auto 20px auto;
+    border-bottom: 1px solid #976dd0;
+}
+
+.preferences button {
+    width: 45%;
+    background-color: #2c2b2c83;
+    margin: 30px 10px;
+}
+
+::placeholder {
+    color: #966dd083
+}
+
+.personalData button, .highwaysData .card button {
+    background-color: #0f0d0d42;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.text-btn {
+    margin-left: 10px;
+}
+
+.personalData input:focus, .personalData input:disabled, .personalData button:hover, .highwaysData .card button, .preferences button:hover, .preferences select:hover, .preferences select option:hover, .problemReports button:hover {
+    outline: 0;
+    background-color: #232323;
+    transition: background-color ease-in-out 1s;
+    cursor: pointer;
+}
+
+.highwaysData button {
+    outline: 0;
+    cursor: pointer;
+}
+
+.highwaysData {
+    width: 90%;
+    display: flex;
+    border: 0.5px #976dd055 solid;
+    border-radius: 0.1px;
+    padding: 10px;
+    margin: 40px auto;
+}
+
+.highwaysData .card {
+    height: max-content;
+    width: 20%;
+    margin: 15px auto;
+    color: #f8f8f8;
+    border-bottom: 1px solid #976dd0;
+}
+
+.highwaysData .card span {
+    margin: 40px auto;
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+.highwaysData .card button {
+    width: 100%;
+    border: 0;
+    color: #976dd0;
+    margin: 20px auto
+}
+
+.highwaysData .card:hover {
+    border-top: 1px solid #27252557;
+    background-color: #976dd0;
+    color: #232323;
+    transition: all ease-in-out 0.5s;
+    transform: scale(1.1);
+}
+
+.btn-card {
+    background-color: #976dd0;
+    color: #232323;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.363);
+    border: 0;
+    width: 5%;
+    height: 60px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.btn-card:hover {
+    background-color: #232323;
+    color: #976dd0;
+    transition: all ease-in-out 0.5s;
+}
+
+.content-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.preferences select option {
+    -moz-appearance: none;
+    appearance: none;
+    width: 250px;
+    background-color: #232323ec;
+    color: #976dd0;
+    border-bottom: 1px solid #966dd083;
+    border-radius: 1.75px;
+    outline: 0;
+}
+
+.preferences fieldset {
+    width: 100%;
+    border: 0;
+    margin: 30px auto;
+}
+
+.preferences fieldset legend,.help-desk{
+    width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #976dd0;
+    border-radius: 1.75px;
+}
+
+.preferences fieldset label {
+    width: 100%;
+    margin: 10px;
+}
+
+/* input radio style start*/
+
+.preferences input[type="radio"] {
+    display: none;
+}
+.preferences [type="radio"]:checked+label,
+.preferences [type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+[type="radio"]:checked+label:before, [type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background: #232323ec;
+}
+
+[type="radio"]:checked+label:after, [type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #976dd0;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/* input radio style end*/
+
+.problemReports {
+    margin: 40px auto;
+    padding: 10px;
+    height: max-content;
+}
+
+.problemReports h2 {
+    margin: 30px auto;
+}
+
+.problemReports textarea {
+    height: 20px;
+    resize: vertical;
+    margin-bottom: 30px;
+}
+
+input[type='file'] {
+    display: none;
+}
+
+.problemReports button {
+    margin: 40px auto;
+}
+
+.problemReports label[for="txtanexo"]{
+    background-color: #976dd0;
+    border-radius: 1px;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    margin: 200px auto;
+}
+.help-desk a{
+    font-weight: bold;
+    color:#232323;
+}
+
+/* Coisas do gameiro <3 :p */
+
+.opcoes {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 15px;
+}
+
+.opcoes button, .opcoes input[type="checkbox"]+label::before{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: transparent;
+    border-radius: 30px;
+    border: #976dd0 2px solid;
+    transition-duration: 0.3s;
+}
+
+.opcoes button:hover{
+    background-color: #976dd0;
+    color: white;
+    cursor: pointer;
+}
+
+.opcoes h3{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"] {display:none;}
+
+input[type="checkbox"]+label::before{
+content:'';
+}
+
+.opcoes input[type="checkbox"]:checked+label::before{
+    background-color: #232323;
+}
+
+.statusHolder {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+.statusHolder h3{
+    color: #232323;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.statusHolder label{
+    font-size: 15px;
+    font-weight: bold;
+}
