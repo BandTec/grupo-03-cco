@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+mz4<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="
+    width=device-width">
     <!-- FOLHA DE ESTILO NOSSA-->
     <link rel="stylesheet" href="src/css/style.css">
     <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
@@ -23,19 +24,19 @@
             </h1>
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a class="link" href="index.html">Home</a>
                 </li>
                 <li>
-                    <a href="sobre.html">Sobre</a>
+                    <a class="link" href="sobre.html">Sobre</a>
                 </li>
                 <li>
-                    <a href="projeto.html">Projeto</a>
+                    <a class="link" href="projeto.html">Projeto</a>
                 </li>
                 <li>
-                    <a href="equipe.html">Equipe</a>
+                    <a class="link" href="equipe.html">Equipe</a>
                 </li>
                 <li>
-                    <a href="login.html">Login</a>
+                    <a class="link" href="login.html">Login</a>
                 </li>
             </ul>
         </nav>
@@ -43,18 +44,40 @@
     <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
 
     <!-- INICIO DO MAIN-  ONDE O CONTEÚDO DA PAGINA ALTERA-->
-    <main class="container height-main">
+    <main class="container ">
         <!-- DESENVOVA SUA  PÁGINA  AQUI DENTRO 😘-->
-        <form>Cadastro<br>
-            <label>Nome de usuário:</label>
-            <input id="login">
-            <label>E-mail:</label>
-            <input id="email"><br>
-            <label>Senha:</label>
-            <input id="senha">
-            <label>Confirme a senha:</label>
-            <input id="confirmSenha">
-            <button>Cadastrar</button><br>
+        <form method="POST">
+            <span class="title-form"> Cadastro</span>
+            <fieldset class="box-form">
+                <legend>Empresa</legend>
+                <label for="txtNomeCliente">Nome da Empresa</label>
+                <input type="text" id="txtNomeCliente" name="nomeCliente" placeholder="Informe o nome da empresa.">
+    
+                <label for="txtCNPJ">CNPJ da empresa</label>
+                <input type="text" id="txtCNPJ"  name="cnpj" placeholder="00.000.000/0001-00">
+            </fieldset>
+
+            <fieldset class="box-form">
+                <legend> Usuário </legend>
+
+                <label for="txtNomeUsuario">Nome do Usuárrio</label>
+                <input type="text" id="txtNomeUsuario" name="nomeUsuario" placeholder="Informe o nome do usuário.">
+
+                <label for="txtCargo">Cargo</label>
+                <input type="text" id="txtCargo" name="cargoUsuario" placeholder="Cargo do usuário">
+
+                <label for="txtNickName">
+                Nome de login
+                </label>
+                <input type="text" id="txtNickName"
+                name="nickUsuario" placeholder="EX: nome-Empresa">
+
+                <label for="txtSenha"> Senha</label>
+                <input type="password
+                " id="txtSenha" name="senha" placeholder="▪▪▪▪▪▪▪▪▪▪">
+
+            </fieldset>
+            <button type="submit" >Cadastrar</button>
         </form>
 
 

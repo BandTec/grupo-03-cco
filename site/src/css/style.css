@@ -26,6 +26,7 @@
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 400;
    font-size: 18px;
+   outline: 0;
 }
 
 .container {
@@ -70,7 +71,7 @@ body {
    /* Se o seu main estiver sem tamanho...
    mesmo que você coloque conteúdo, utilize está classe
    */
-   height: 80vh;
+   height: 90vh;
    margin-top: 20px;
 }
 
@@ -108,7 +109,7 @@ nav a {
    font-size: 14px;
 }
 
-nav a:hover {
+nav .link:hover {
    color: var(--corRoxo);
    transition: all 0.3s ease-in-out;
    padding: 0px 10px;
@@ -314,13 +315,13 @@ margin-top: 30px;
 /*COLOQUE ABAIXO O CSS DA PÁGINA  LOGIN  */
 
 form {
-   width: 300px;
-   margin: auto;
+   width: 50%;
+   margin: 30px auto;
    border: 1px #976DD0 solid;
    border-radius: 4px;
    /* APLICA UM ARREDONDAMENTO DE BORDA DE 4 PIXELS*/
    padding: 20px;
-   color: #ffffff;
+   color: var(--corFundo);
    background-color: #976DD0;
    /*APLICA UMA SOMBRA */
    box-shadow: 4px 4px 6px #00000067 ;
@@ -331,33 +332,48 @@ form input {
    border-radius: 4px;
    border: 1px #976DD0 solid;
    Margin: 10px 0px;
-   padding-left: 2px;
-}
+   padding: 5px 0px 5px 5px;
+} 
 
+form input::placeholder{
+   color:#23232379;
+}
 form button {
    width: 100%;
    border: 0;
    /*RETIRA A BORDA*/
    border-radius: 4px;
    /* APLICA UM ARREDONDAMENTO DE BORDA DE 4 PIXELS*/
-   color: #ffffff;
+   color: var(--corFundo);
    background-color: #232323;
    padding: 5px 15px;
    /*aplica um padding de 5px na vertical e 15px na horizontal*/
    cursor: pointer;
    /* APLICA UM CURSOR DE MOUSE NO FORMATO DA MÃOZINHA*/
-   margin-bottom: 20px;
+   margin:  20px auto;
 }
 
-form button a{
+form button a, form a{
    font-style: normal;
-   color: #ffffff;
+   color: var(--corFundo);
+   text-decoration: none;
 }
 
-form a {
-   margin: 15px;
+form .link-form{
+   margin:30px auto;
+   padding: 5px;
 }
+form .box-form{
+   border: 1px solid var(--corPreto);
+   padding:  20px;
+   margin: 20px auto
 
+}
+form .box-form legend{
+   background-color: var(--corPreto);
+   padding: 5px;
+
+}
 /*COLOQUE ACIMA O CSS DA PÁGINA LOGIN*/
 
 /*COLOQUE ABAIXO O CSS DA PÁGINA  PROJETO  */
@@ -528,57 +544,8 @@ form a {
 /*COLOQUE ACIMA O CSS DA PÁGINA EQUIPE*/
 
 /*COLOQUE ABAIXO O CSS DA PÁGINA DASHBOARD*/
-
-.barra_botoes {
-   padding: 20px;
+canvas {
+   -moz-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
 }
-
-.botoes_direita {
-   float: right;
-}
-
-.corpo_graficos {
-   height: 500px;
-   background-color: var(--corFundo);
-   display: flex;
-   margin-top: 75px;
-}
-
-.tempo_real {
-   flex: 1;
-   margin-left: 10px;
-   margin-right: 10px;
-   text-align: center;
-   width: 300px;
-   height: 350px;
-   border-bottom: 2px var(--corRoxo) solid;
-   background-color: #ffffff;
-}
-
-.tempo_semanal {
-   flex: 1;
-   margin-left: 10px;
-   margin-right: 10px;
-   text-align: center;
-   width: 300px;
-   height: 350px;
-   border-bottom: 2px var(--corRoxo) solid;
-   background-color: #ffffff;
-}
-
-.tempo_mensal {
-   flex: 1;
-   margin-left: 10px;
-   margin-right: 10px;
-   text-align: center;
-   width: 300px;
-   height: 350px;
-   border-bottom: 2px var(--corRoxo) solid;
-   background-color: #ffffff;
-}
-
-/* COLOQUE ACIMA O CSS DA PÁGINA DASHBOARD */
-
-/*COLOQUE ABAIXO O CSS DA PÁGINA DO SIMULADOR FINANCEIRO*/
-
-/*COLOQUE ACIMA O CSS DA PÁGINA DO SIMULADOR FINANCEIRO*/

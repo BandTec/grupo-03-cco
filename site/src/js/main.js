@@ -8,7 +8,6 @@ function simu(){
         idResposta1.innerHTML = `Você economizará R$${lucroManu.toFixed(2)} com gastos de manutenção`;
         idResposta2.innerHTML = `Seu lucro publicitário mínimo será de R$${lucroMin.toFixed(2)}`;
         idResposta3.innerHTML = `Seu lucro publicitário máximo será de R$${lucroMax.toFixed(2)}`;
-
-    
+   
     
 }

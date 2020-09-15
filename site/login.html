@@ -23,19 +23,19 @@
             </h1>
             <ul class="middle">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a class="link" href="index.html">Home</a>
                 </li>
                 <li>
-                    <a href="sobre.html">Sobre</a>
+                    <a class="link" href="sobre.html">Sobre</a>
                 </li>
                 <li>
-                    <a href="projeto.html">Projeto</a>
+                    <a class="link" href="projeto.html">Projeto</a>
                 </li>
                 <li>
-                    <a href="equipe.html">Equipe</a>
+                    <a class="link" href="equipe.html">Equipe</a>
                 </li>
                 <li>
-                    <a href="login.html" class="current">Login</a>
+                    <a class="link" href="login.html" class="current">Login</a>
                 </li>
             </ul>
         </nav>
@@ -43,17 +43,17 @@
     <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
     <!-- INICIO DO MAIN-  ONDE O CONTEÚDO DA PAGINA ALTERA-->
     
-    <main class="container height-main">
+    <main class="container" style="height: 90vh;">
         <!-- DESENVOVA SUA  PÁGINA  AQUI DENTRO 😘-->
         <form>
-            Login<br>
-            <label>E-mail:</label>
-            <input id="email">
-            <label>Senha:</label>
-            <input id="senha">
-            <button><a href="Dashboard.html">Entrar</a></button>
-            <a href="cadastro.html"> Cadastro</a>
-            <a href="esqueciSenha.html">Esqueceu a senha?</a>
+           <span class="title-form" > Login</span>
+            <label for="txtEmail">E-mail:</label>
+            <input id="txtEmail" name="email">
+            <label for="txtSenha">Senha:</label>
+            <input id="txtSenha" type="password" name="senha">
+            <button type="submit"><a href="Dashboard.html">Entrar</a></button>
+            <a class="link-form" href="cadastro.html"> Cadastro</a>
+            <a class="link-form" href="esqueciSenha.html">Esqueceu a senha?</a>
         </form>
 
 
