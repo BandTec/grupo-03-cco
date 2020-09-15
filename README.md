@@ -1,13 +1,18 @@
-# PNEU
+﻿# PNEU
 
 #### Projetando números, efetuando upgrades
 
 ![Sr Pato Patoso](duckDev.jpeg)
 >O Sr pato é nossa inspiração, nossa força para continuar e sermos pessoas melhores :)
 
+Para nossa religião json = jhonson
+
 =======
-### 👩‍💻Duck Developers 👨‍💻
->  _Francecolly Santos_
+### 👩‍💻 Legacy Duck Developers 👨‍💻
+
+🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
+
+>  _Francescolly Santos_
 
 >  _Isabella Santos_
 
@@ -21,20 +26,21 @@
 
 🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
 
-👩‍💻 New Duck Developers 👨‍💻
+
+### 👩‍💻 New Duck Developers 👨‍💻
 
 🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
 
-Francescolly Santos
+>  _Francescolly Santos_
 
-Leonardo Oliveira Leal
+> _Leonardo Oliveira Leal_
 
-Lucas Ferreira
+>  _Lucas Ferreira_
 
-Mateus Castro
+> _Mateus Castro_ 
 
-Mateus Gomes
+> _Mateus Gomes_
 
-Jennifer Silva
+> _Jennifer Silva_
 
 🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
