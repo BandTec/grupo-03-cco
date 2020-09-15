@@ -18,3 +18,22 @@
 >  _Luiza Bezerra_
 
 >  _Rafael Ferreira_
+
+🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
+
+👩‍💻 New Duck Developers 👨‍💻
+🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
+
+Francescolly Santos
+
+Leonardo Oliveira Leal
+
+Lucas Ferreira
+
+Mateus Castro
+
+Mateus Gomes
+
+Jennifer Silva
+
+🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆
