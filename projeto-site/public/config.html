@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- FOLHA DE ESTILO NOSSA-->
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/styledas.css">
+    <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vaibhav111tandon/vov.css@latest/vov.css ">
+    <!--Icone da aba [ guia ] do navegador-->
+    <link rel="shortcut icon" href="src/img/icon-pneu.png" type="image/x-icon">
+    <title>Pneu - Configurações</title>
+</head>
+
+<body class="bgblack">
+    <!-- INICIO DO HEADER [CABEÇALHO] -  ABAIXO FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+    <header>
+        <div class="container">
+            <h1 class="middle">
+                <img src="src/img/icon-pneu.png" alt="Icone de" class="icon-header">
+                <span class="text-left">Pneu</span>
+            </h1>
+
+
+            <!-- INICIO MENU DE NAVEGAÇÃO-->
+
+            <div id="circularMenu" class="circular-menu circular-menu-left">
+
+                <a class="floating-btn" onclick="document.getElementById('circularMenu').classList.toggle('active');">
+                    <i class="fas fa-ellipsis-v"></i>
+                </a>
+
+                <nav class="items-wrapper">
+
+                    <a href="perfil.html" class="menu-item fa fa-user"></a>
+
+                    <a href="Dashboard.html" class="menu-item fa fa-pie-chart"></a>
+
+                    <a href="config.html" class="menu-item fa fa-cog current vov flash infinte"></a>
+
+                    <a href="https://pneu.on.spiceworks.com/knowledge_base/articles/170775"  class="menu-item fa fa-question" target="_blank" rel="noreferrer noopener"></a>
+
+                </nav>
+
+            </div>
+            <!-- FIM DO MENU DE NAVEGAÇÃO-->
+
+        </div>
+    </header>
+    <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+
+    <main class="container margin-main highlight">
+
+        <h1 class="vov fade-in-left">
+            <i class="fa fa-cog">
+                <span class="text-btn"> Minhas preferências </span>
+            </i>
+        </h1>
+        <div class="preferences">
+            
+            <label for="slcTemp">
+                Coleta de dados em tempo real, medido em:
+                <select id="slcTemp">
+                    <option value="1"> 1 Minuto </option>
+                    <option value="2"> 30 Minutos </option>
+                    <option value="3"> 1 Hora </option>
+                    <option value="4"> 3 Horas </option>
+                </select>
+            </label>
+            
+            <fieldset>
+                <legend>Configuração de alertas</legend>
+
+                <label for="lowFlow">
+                    Alerta baixo fluxo
+                    <select id="lowFlow">
+                        <option value="">Menor que 150</option>
+                        <option value="">Menor que 100</option>
+                        <option value="">Menor que 500</option>
+                    </select>
+                </label>
+
+                <label for="mediumFlow">
+                    Alerta médio fluxo
+                    <select id="mediumFlow">
+                        <option value="">Fluxo entre 500 e 600</option>
+                        <option value="">Fluxo entre 400 e 500</option>
+                        <option value="">Fluxo entre 200 e 300</option>
+                    </select>
+                </label>
+                
+                <label for="highFlow">
+                    Alerta alto fluxo
+                    <select id="highFlow">
+                        <option value="">Acima de 100 </option>
+                        <option value="">Acima de 800 </option>
+                        <option value="">Acima de 600 </option>
+                    </select>
+                </label>
+
+            </fieldset>
+
+            <fieldset>
+                <legend> Aceita receber sugestões de manutenção e publicidade?</legend>
+
+                <input type="radio" name="suggestions" id="yesSuggestions" checked>
+                <label for="yesSuggestions">
+                    Sim desejo receber as sugestões.
+                </label>
+
+                <input type="radio" name="suggestions" id="noSuggestions">
+                <label for="noSuggestions">
+                    Não desejo receber as sugestões
+                </label>
+            </fieldset>
+
+            <label for="slcBlockRoads">
+                Bloquear coleta de dados da via:
+                <select id="slcBlockRoads">
+                    <option value="0">BR - 101 </option>
+                    <option value="1">BR - 102 </option>
+                    <option value="2">BR - 103 </option>
+                    <option value="3">BR - 104 </option>
+                    <option value="4">BR - 105 </option>
+                </select>
+            </label>
+
+            <button disabled>
+                <i class="fas fa-pen"></i>
+                <span class="text-btn">
+                    Editar
+                </span>
+            </button>
+
+            <button disabled>
+                <i class="fas fa-save"></i>
+                <span class="text-btn">
+                    Salvar
+                </span>
+            </button>
+
+        </div>
+
+        <!-- SESSÃO DE REPORTAR BUG -->
+        <h2 class="vov fade-in-left ">
+            <i class="fa fa-bug">
+                <span class="text-btn">
+                    Reportar problemas
+                </span>
+            </i>
+        </h2>
+        <div class="problemReports">
+
+            <label for="txtProblema">
+                Por favor informe problema
+                <input type="text" id="txtProblema" placeholder="Ex: Gráficos não carregam">
+            </label>
+            <label for="txtMensagemProblemaAntes">
+                O que você fez antes de encontrar o problema?
+                <textarea id="txtMensagemProblemaAntes" placeholder="Desliguei o equipamento de rede ... "></textarea>
+            </label>
+            <label for="txtMensagemProblemaDepois">
+                O que você fez depois de encontrar o problema?
+                <textarea id="txtMensagemProblemaDepois" placeholder="Reiniciei depois de lavá-lo... "></textarea>
+            </label>
+            <label for="txtanexo">
+                Você tirou um print, que tal anexa-lo?
+                <input type="file" id="txtanexo" placeholder="Ex: Print da mensagem de erro">
+            </label>
+            <button disabled>
+                <i class="fas fa-paper-plane"></i>
+                <span class="text-btn">
+                    Relatar
+                </span>
+            </button>
+
+            <span class="help-desk">
+                Se preferir entre em contato através da nossa 
+                <a href="https://pneu.on.spiceworks.com" target="_blank" rel="noopener noreferrer" class="link">
+                    plataforma de suporte
+                </a>                 
+            </span><br><br>
+            <span class="help-desk">
+                Você também pode nos enviar um e-mail: 
+                <a href="mailto:help@pneu.on.spiceworks.com">help@pneu.on.spiceworks.com</a>.
+            </span>
+        </div>
+
+    </main>
+
+    <footer>
+        <p class="container">
+            &copy;2020 - Projeto<span class="highlight" role="text">Pneu</span>. Desenvolvido com
+            <span class="highlight" role="text"> ❤</span> por
+            <span class="highlight" role="text"> { DuckDevelopers } </span>
+        </p>
+    </footer>
+    <!-- FIM DO FOOTER [RODPÉ] -->
+
+    <!-- ABAIXO DESTE COMENTÁRIO FICARÁ AS CHAMADAS DE SCRIPTS JS -->
+    <!-- Script javascript nosso -->
+    <script src="src/js/main.js"></script>
+    <script src="src/js/charts.js"></script>
+    <script src="https://kit.fontawesome.com/29db2d61c6.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

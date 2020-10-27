@@ -1,0 +1,72 @@
+.containeruau{
+    padding-left: 30px;
+    margin-top: 30px;
+}
+.container1uau .carduau h1{
+    text-align: center;
+    color: purple;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.container2uau .card2uau h1{
+    text-align: center;
+    color: purple;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.container3uau .card3uau h1{
+    text-align: center;
+    color: purple;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.container1uau .carduau{
+    width: 30%;
+    padding: 10px;
+    text-align: center;
+    border-left: purple 3px solid;
+    margin-left: 150px;
+}
+.container2uau .card2uau{
+    width: 30%;
+    padding: 10px;
+    text-align: center;
+    border-left: purple 3px solid;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 150px;
+}
+.container3uau .card3uau{
+    width: 30%;
+    padding: 10px;
+    text-align: center;
+    border-left: purple 3px solid;
+    margin-top: 100px;
+    margin-left: 150px;
+}
+.imageuau{
+    width: 300px;
+    float: right;
+    margin-right: 150px;
+}
+.image2uau{
+    width: 300px;
+    float: right;
+    margin-right: 150px;
+    margin-top: 100px;
+}
+.image3uau{
+    width: 300px;
+    float: right;
+    margin-right: 150px;
+    margin-top: 100px;
+}
+.containeruau p{
+    font-size: 20px;
+}
+/*
+    Pense nas classes como um gato, todo gato tem caracteriscas proprias entretanto não deixam de ser gato.
+    Isso quer dizer que, você pode ter um gato preto, outro amarelo, e outro pintado, todos são gatos  e possuem caracteristicas semelhantes, mas possuem suas diferenças.
+
+    Com as classes isso também pode ocorrer, por exemplo: 
+    -> container1 container2 e container3 possuem as mesmas caracteristas, portanto podem ser apenas uma classe comum. Mas supondo que o container 2 deve ter um texto justuficado e uma color verde, bom basta criar uma classe a mais com essas duas caracteristica, assim todos são containers,possuindo as semelhanças  e as diferenças. Desta maneira o código ficará otimizado, e haverá um padrão nos elementos.
+
+
+*/

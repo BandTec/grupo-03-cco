@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- FOLHA DE ESTILO NOSSA-->
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/styledas.css">
+    <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vaibhav111tandon/vov.css@latest/vov.css ">
+    <!--Icone da aba [ guia ] do navegador-->
+    <link rel="shortcut icon" href="src/img/icon-pneu.png" type="image/x-icon">
+    <title>Pneu - Perfil</title>
+</head>
+
+<body class="bgblack">
+    <!-- INICIO DO HEADER [CABEÇALHO] -  ABAIXO FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+    <header>
+        <div class="container">
+            <h1 class="middle">
+                <img src="src/img/icon-pneu.png" alt="Icone de" class="icon-header">
+                <span class="text-left">Pneu</span>
+            </h1>
+
+
+            <!-- INICIO MENU DE NAVEGAÇÃO-->
+
+            <div id="circularMenu" class="circular-menu circular-menu-left">
+
+                <a class="floating-btn" onclick="document.getElementById('circularMenu').classList.toggle('active');">
+                    <i class="fas fa-ellipsis-v"></i>
+                </a>
+
+                <nav class="items-wrapper">
+
+                    <a href="perfil.html" class="menu-item fa fa-user current vov flash infinte"></a>
+
+                    <a href="Dashboard.html" class="menu-item fa fa-pie-chart"></a>
+
+                    <a href="config.html" class="menu-item fa fa-cog"></a>
+
+                    <a href="https://pneu.on.spiceworks.com/knowledge_base/articles/170775"
+                        class="menu-item fa fa-question" target="_blank" rel="noreferrer noopener"></a>
+
+                </nav>
+
+            </div>
+            <!-- FIM DO MENU DE NAVEGAÇÃO-->
+
+        </div>
+    </header>
+    <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+
+    <main class="container margin-main">
+        <h1 class="vov fade-in-left">
+            <i class="fa fa-user">
+                <span class="text-btn"> Meu Perfil </span>
+            </i>
+        </h1>
+        <div class="personalData">
+            <!-- dados pessoais-->
+            <label for="txtNomeCliente">
+                Nome empresa:
+                <input id="txtNomeCliente" name="nome" value="Consórcio vias Mar" disabled>
+            </label>
+            <label for="txtCNPJ">
+                CNPJ:
+                <input id="txtCNPJ" type="text" value="11.999.888-0001/11" disabled>
+            </label>
+            <label for="txtNomeUsuario">
+                Nome:
+                <input id="txtNomeUsuario" name="nome" value="José" disabled>
+            </label>
+            <label for="txtCargo">
+                Cargo:
+                <input id="txtCargo" value="Admnistrador" disabled>
+            </label>
+            <button>
+                <i class="fas fa-pen"></i>
+                <span class="text-btn">
+                    Editar
+                </span>
+            </button>
+        </div>
+
+        <h2 class="highlight vov fade-in-left">
+            <i class="fa fa-road">
+                <span class="text-btn">Dados das rodovias </span>
+            </i>
+        </h2>
+
+        <div id="boxHighwaysData" class="highwaysData content-wrap">
+            <!-- dados das rodovias-->
+            <button class="btn-card" id="cadastroUsuarios" disabled>
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <h2 class="highlight vov fade-in-left">
+            <i class="far fa-address-card">
+                <span class="text-btn">Dados dos funcionários </span>
+            </i>
+        </h2>
+        <div class="highwaysData content-wrap">
+            
+            <button class="btn-card" id="cadastroUsuarios" disabled>
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p class="container">
+            &copy;2020 - Projeto<span class="highlight" role="text">Pneu</span>. Desenvolvido com
+            <span class="highlight" role="text"> ❤</span> por
+            <span class="highlight" role="text"> { DuckDevelopers } </span>
+        </p>
+    </footer>
+    <!-- FIM DO FOOTER [RODPÉ] -->
+
+    <!-- ABAIXO DESTE COMENTÁRIO FICARÁ AS CHAMADAS DE SCRIPTS JS -->
+    <!-- Script javascript nosso -->
+    <script src="src/js/main.js"></script>
+    <!-- js do fontawsome icones-->
+    <script src="https://kit.fontawesome.com/29db2d61c6.js" crossorigin="anonymous"></script>
+    <script>
+        function buscarDados() {
+
+            let nomeUsuario = document.getElementById('txtNomeUsuario');
+            let cargoUsuario = document.getElementById('txtCargo');
+            let cnpjCliente = document.getElementById('txtCNPJ');
+            let nomeCliente = document.getElementById('txtNomeCliente');
+
+            const id = parseInt(sessionStorage.id_usuario_meuapp);
+            const fk = parseInt(sessionStorage.fk_usuario_meuapp);
+
+            nomeUsuario.value = sessionStorage.nome_usuario_meuapp;
+            cargoUsuario.value = sessionStorage.cargo_usuario_meuapp;
+
+            fetch(`/usuarios/buscar/${id}/${fk}`, { method: 'GET' })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Response: OK');
+                        response.json().then(result => {
+                            let dados = result;
+                            cnpjCliente.value = dados[0].CNPJ;
+                            nomeCliente.value = dados[0].nomeCliente;
+                        });
+                    }
+                });
+            rodoviasDoCliente(fk);
+        }
+        buscarDados();
+
+        function rodoviasDoCliente(cliente) {
+            let divRodovias = document.getElementById('boxHighwaysData');
+            fetch(`/leituras/pegarRodoviasBD/${cliente}`).then(response => {
+                console.log('Fetch ok');
+                if (response.ok) {
+                    console.log('Response: OK');
+                    return response.json().then(function (retornoBD) {
+                        console.log(retornoBD);
+                        rodoviasObtidas = retornoBD;
+
+                        for (var i = 0; i < rodoviasObtidas.length; i++) {
+                            console.log('Rodovia da vez: ' + rodoviasObtidas[i].nomeRodovia);
+                            divRodovias.innerHTML += `                    
+                              <div class="card" style="width:25%;">
+                                  <span class="title-card">${rodoviasObtidas[i].nomeRodovia}</span>
+                                <button disabled>
+                                    <i class="fas fa-pen"></i>
+                                    <span class="text-btn">
+                                        Editar
+                                    </span>
+                                </button>
+                              </div>`;
+                        }
+                    });
+                }
+            });
+            console.log('Depois do fetch :(');
+        }
+    </script>
+
+</body>
+
+</html>
