@@ -1,0 +1,47 @@
+create table Login(
+idLogin int primary key auto_increment,
+nome varchar(45),
+cargo varchar(45),
+nick varchar(45),
+senha varchar(45)
+);
+
+create table Localizacao(
+idLocalizacao int primary key auto_increment,
+estado varchar(45),
+cidade varchar(45),
+bairro varchar(45),
+rua varchar(45),
+numero varchar(45)
+) ;
+
+create table Servidor(
+idServidor int primary key auto_increment,
+status varchar(45),
+fkLocalizacao int,
+foreign key (fkLocalizacao) references Localizacao(idLocalizacao)
+);
+
+create table Acesso(
+idAcesso int primary key auto_increment,
+fkLogin int, 
+fkServidor int,
+foreign key (fkServidor) references Servidor(idServidor),
+foreign key (fkLogin) references Login(idLogin)
+);
+
+create table Componente(
+idComponente int primary key auto_increment,
+tipo varchar(45),
+metrica varchar(45),
+fkServidor int,
+foreign key (fkServidor) references Servidor(idServidor)
+);
+
+create table ValorLeitura(
+idValorLeitura int primary key auto_increment,
+valor varchar(45),
+dataTempo varchar(45),
+fkComponente int,
+foreign key (fkComponente) references Componente(idComponente)
+);

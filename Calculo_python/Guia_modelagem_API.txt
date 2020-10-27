@@ -1,0 +1,11 @@
+Nossa empresa lida com a manutenção de maneira interna.
+Nós somos nossos prórprios clientes uma vez que desenvolvemos um produto para nós.
+Logo, existe um login que entra em vários servidores, e vários servidores podem ser acessados por vários logins.
+
+
+Cada servidor gera várias leituras, e cada leitura pertence à somente 1 servidor.
+cada leitura, lê diversos componentes, e cada componente é lido por uma leitura.
+
+Na tabela componente, serão inseridos tipo,metrica,
+na tabela valorLeitura, serão inserirdos a qual componente e a qual leitura pertencem aquele valor. 
+sendo assim, nosso insert seria triplo ou quadruplo (ou x vezes) dependendo de quantas métricas queremos passar.
