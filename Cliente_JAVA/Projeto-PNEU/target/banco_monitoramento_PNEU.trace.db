@@ -1,0 +1,3 @@
+2020-10-26 13:07:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "LOGIN" not found; SQL statement:
+select * from Login where nick = ? and senha = ? [42102-200]
