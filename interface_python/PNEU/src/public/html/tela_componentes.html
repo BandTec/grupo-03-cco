@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>Componentes</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-login">PNEU</div>
+    </header>
+    <section class="graficos">
+        <div class="container">
+            <div class="box-componente w30">
+                <div class="componente-item">
+                    <div class="componente-texto-item">
+                        <p class="texto-item" onclick="mostrarGraficoCPU()">CPU</p>
+                        <div class="medidas-item">
+                            <p class="texto2-item">Uso: <span id="txtUsoCpu"></span></p>
+                            <p class="texto2-item">Temperatura: <span id="txtTemperatura"></span></p>
+                            <p class="texto2-item">Clock: <span id="txtClock"></span> </p>
+                        </div>
+                    </div>
+                    <div class="componente-texto-item">
+                        <p class="texto-item" onclick="mostrarGraficoDisco()">Disco</p>
+                        <div class="medidas-item">
+                            <p class="texto2-item">Uso: <span id="txtUsoPDisco"></span></p>
+                            <p class="texto2-item">Uso: <span id="txtUsoTDisco"></span></p>
+                        </div>
+                    </div>
+                    <div class="componente-texto-item">
+                        <p class="texto-item" onclick="mostrarGraficoMemoria()">Memoria</p>
+                        <div class="medidas-item">
+                            <p class="texto2-item">Uso: <span id="txtUsoPRam"></span></p>
+                            <p class="texto2-item">Uso: <span id="txtUsoTRam"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-grafico w70">
+                <div class="grafico-item">
+                    <canvas id="graficoTeste"></canvas>
+                    <div class="medidas-grafico">
+                        <span class="texto-grafico">Uso: <span id="porcentagemCPU"></span></span>
+                        <span class="texto-grafico">Temperatura: <span id="temperaturaCPU"></span></span>
+                        <span class="texto-grafico">Clock: <span id="clockCPU"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+
+    var ctx = document.getElementById('graficoTeste');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+            datasets: [{
+                label: 'CPU',
+                backgroundColor: 'rgb(151, 109, 208)',
+                borderColor: 'rgb(151, 109, 208)',
+                data: [],
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    setInterval(function () { mostrarGraficoCPU() }, 1000);
+    setInterval(function () { mostrarGraficoDisco() }, 1000);
+    setInterval(function () { mostrarGraficoMemoria() }, 1000);
+
+
+    function mostrarGraficoCPU() {
+
+        var usoCPU = parseInt(Math.random() * 100);
+        let temperatura = parseInt(Math.random() * (60 - 40)) + 40;
+        let clock = parseInt(Math.random() * (3500 - 1200)) + 1200;
+
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.push(usoCPU);
+        });
+
+        chart.update();
+
+        document.getElementById('txtUsoCpu').innerHTML = `${usoCPU}%`;
+        document.getElementById('txtTemperatura').innerHTML = `${temperatura}°C`;
+        document.getElementById('txtClock').innerHTML = `${clock}MHz`;
+
+        document.getElementById('porcentagemCPU').innerHTML = `${usoCPU}%`;
+        document.getElementById('temperaturaCPU').innerHTML = `${temperatura}°C`;
+        document.getElementById('clockCPU').innerHTML = `${clock}MHz`;
+
+
+    }
+
+    function mostrarGraficoDisco() {
+
+        var usoDisco = parseInt(Math.random() * 100);
+
+        document.getElementById('txtUsoPDisco').innerHTML = `${usoDisco}%`;
+        document.getElementById('txtUsoTDisco').innerHTML = `${usoDisco}GB`;
+
+    }
+
+    function mostrarGraficoMemoria() {
+        var usoMem = parseInt(Math.random() * 100);
+
+        document.getElementById('txtUsoPRam').innerHTML = `${usoMem}%`;
+        document.getElementById('txtUsoTRam').innerHTML = `${usoMem}GB`;
+    }
+</script>

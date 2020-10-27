@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PNEU INTERFACE</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+    <script src="./Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+  <body>
+    <header>
+      <div class="header-login">PNEU</div>
+    </header>
+    <canvas id="graficoteste" width="400" height="400"></canvas>
+  
+    <div class="div-botao">
+        <button onclick="pegarDados()" id="botao_muda_tela" class="botao-escolha">
+          <a href="tela3.html">
+            Visualizar
+          </a> 
+        </button> 
+    </div>
+  </body>
+</html>
+<script>
+var numerosAleatorio = [Math.random()* 100,Math.random()* 100,Math.random()* 100,Math.random()* 100,Math.random()* 100,Math.random() * 100, Math.random() * 100]
+
+var ctx = document.getElementById('graficoteste');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+
+   
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [numerosAleatorio[0], numerosAleatorio[1], numerosAleatorio[2],numerosAleatorio[3], numerosAleatorio[4], numerosAleatorio[5], numerosAleatorio[6]]
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+</script>
+
+    
