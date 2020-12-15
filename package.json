@@ -1,0 +1,22 @@
+{
+  "name": "pneu",
+  "version": "1.0.0",
+  "description": "![Sr Pato Patoso](duckDev.jpeg)\r >O Sr pato é nossa inspiração, nossa força para continuar e sermos pessoas melhores :)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasFerreiraLF/PNEU.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasFerreiraLF/PNEU/issues"
+  },
+  "homepage": "https://github.com/lucasFerreiraLF/PNEU#readme"
+}
