@@ -1,0 +1,94 @@
+create database projeto;
+use projeto;
+
+/*
+create table CODES(
+    id int primary key auto_increment,
+    code varchar(5)
+
+desc codes;
+);
+*/
+
+
+/*Script pra modelagem do monitoramento*/
+
+create table Usuario(
+    idUsuario int primary key auto_increment,
+    nome varchar(45),
+    cargo varchar(45),
+    nick varchar(45),
+    senha varchar(45),
+    email varchar(45)
+);
+
+insert into Usuario values
+    (null, "Jennifer Silva", "Gerente", "jenni", "jenni123", "jennifer@email.com"),
+    (null, "Leonardo Leal", "Analista", "leo", "leo123", "leonardo@email.com");
+
+create table Localizacao(
+    idLocalizacao int primary key auto_increment,
+    estado varchar(45),
+    cidade varchar(45),
+    bairro varchar(45),
+    rua varchar(45),
+    numero varchar(45)
+);
+
+create table Servidor(
+    idServidor int primary key auto_increment,
+    statusOnline varchar(45),
+    nomeServidor varchar(45),
+    fkLocalizacao int,
+    foreign key (fkLocalizacao) references Localizacao(idLocalizacao)
+);
+
+create table Acesso(
+    idAcesso int primary key auto_increment,
+    fkUsuario int,
+    fkServidor int,
+    foreign key (fkUsuario) references Usuario(idUsuario),
+    foreign key (fkServidor) references Servidor(idServidor)
+);
+
+create table TipoComponente(
+    idTipoComponente int primary key auto_increment,
+    tipo varchar(45),
+    metrica varchar(45)
+    );
+
+create table Componente(
+    idComponente int primary key auto_increment,
+    fkTipoComponente int,
+    fkServidor int,
+    foreign key (fkServidor) references Servidor(idServidor),
+    foreign key (fkTipoComponente) references TipoComponente(idTipoComponente)
+);
+
+create table ValorLeitura(
+    idValorLeitura int primary key auto_increment,
+    valor varchar(45),
+    dataTempo varchar(45),
+    fkComponente int,
+    foreign key (fkComponente) references Componente(idComponente)
+);
+
+insert into TipoComponente values (1, 'CPU', 'Porcentagem'),
+				 (2, 'CPU', 'Clock'),
+				 (3, 'CPU', 'Temperatura'),
+				 (4, 'Memória', 'Porcentagem'),
+				 (5, 'Memória', 'GB'),
+				 (6, 'Disco', 'Porcentagem'),
+				 (7, 'Disco', 'GB');
+
+/*
+DESCRIÇÃO DAS TABELAS
+
+desc Usuario;
+desc Localizacao;
+desc Servidor;
+desc Acesso;
+desc TipoComponente;
+desc Componente;
+desc ValorLeitura;
+*/
