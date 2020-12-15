@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PNEU INTERFACE</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+  <body>
+    <header>
+      <div class="header-login">PNEU</div>
+    </header>
+    <div style="width: 200px; height: 200px;">
+      <canvas id="graficoteste" width="400" height="400"></canvas>
+    </div>
+  
+    <div class="div-botao">
+        <button onclick="pegarDados()" id="botao_muda_tela" class="botao-escolha">
+          <a href="tela3.html">
+            Visualizar
+          </a> 
+        </button> 
+    </div>
+  </body>
+</html>
+<script>
+
+var ctx = document.getElementById('grafiquinhoTESTE');
+var chartinhoCPU = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+
+   
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'CPU',
+            fill: false,
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: []
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+            scales: {
+                yAxes: [{
+                    display : false,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+
+                xAxes: [{
+                  display: false
+                }]
+            }
+        }
+});
+var contador = 0;
+var loopCPU = setInterval(gerarValoresCPU, 1000);
+var usoCPU;
+
+    function gerarValoresCPU() {
+
+        usoCPU = parseInt(Math.random() * 100);
+        let temperatura = parseInt(Math.random() * (60 - 40)) + 40;
+        let clock = parseInt(Math.random() * (3500 - 1200)) + 1200;
+
+        contador++;
+        plotarGrafico(chartinho,usoCPU);
+    }
+
+
+    function plotarGrafico(grafico,dados){
+        grafico.data.datasets.forEach((dataset) => {
+            dataset.data.push(dados);
+        });
+      
+        grafico.data.labels.push(contador);
+         
+       if(contador > 11){
+            grafico.data.labels.shift();            
+            grafico.data.datasets.forEach((dataset) => {
+                dataset.data.shift();
+             });
+       }
+
+       grafico.update();
+    }
+
+
+</script>
+
+    

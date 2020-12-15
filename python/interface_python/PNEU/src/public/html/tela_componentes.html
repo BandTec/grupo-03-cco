@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>Componentes</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-login">PNEU</div>
+        <div class="header-identificador" id="tituloServidor">Servidor 0</div>
+        <div class="clear"></div>
+    </header>
+    <section class="graficos">
+        <div class="container">
+            <div class="box-componente w30">
+                <div class="componente-item">
+                    <div class="componente-texto-item">
+
+                        <div class="medidas-item">
+                            <div class="grafiquinho"
+                                onclick="mae(graficoTesteCPU,graficoTesteDisco,graficoTesteMem,'lbUsoCPU','lbTemp','lbClock','lbPercentD','lbPercentMem','lbGBD','lbGBMem')"
+                                style="border-color: #39b4db">
+                                <canvas id="grafiquinhoCPU"></canvas>
+                            </div>
+                            <p class="texto2-item">Uso: <span id="txtUsoCpu"></span>%</p>
+                            <p class="texto2-item">Temperatura: <span id="txtTemperatura"></span>°C</p>
+                            <p class="texto2-item">Clock: <span id="txtClock"></span> MHz</p>
+                        </div>
+                    </div>
+                    <div class="componente-texto-item">
+                        <div class="medidas-item">
+                            <div class="grafiquinho"
+                                onclick="mae(graficoTesteDisco,graficoTesteCPU,graficoTesteMem,'lbGBD','lbPercentD','lbUsoCPU','lbTemp','lbClock','lbGBMem','lbPercentMem')"
+                                style="border-color: #d864d6">
+                                <canvas id="grafiquinhoDisco"></canvas>
+                            </div>
+
+                            <p class="texto2-item">Porcentagem: <span id="txtUsoPDisco"> </span>%</p>
+                            <p class="texto2-item">Uso: <span id="txtUsoTDisco"> </span>GB</p>
+                        </div>
+                    </div>
+                    <div class="componente-texto-item">
+                        <div class="medidas-item">
+                            <div class="grafiquinho"
+                                onclick="mae(graficoTesteMem,graficoTesteCPU,graficoTesteDisco,'lbGBMem','lbPercentMem','lbUsoCPU','lbTemp','lbClock','lbGBD','lbPercentD')"
+                                style="border-color: #ff0066;">
+                                <canvas id="grafiquinhoMem"></canvas>
+                            </div>
+
+                            <p class="texto2-item">Porcentagem: <span id="txtUsoPRam"></span>%</p>
+                            <p class="texto2-item">Uso: <span id="txtUsoTRam"></span>GB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-grafico w70">
+                
+                <div class="grafico-item">
+                    <canvas id="graficoTesteCPU" style="width: 900px; height: 700px;"></canvas>
+                    <canvas id="graficoTesteMem" style="display: none;width: 900px; height: 700px;"></canvas>
+                    <canvas id="graficoTesteDisco" style="display: none;width: 900px; height: 700px;"></canvas>
+                </div>
+                <div class="medidas-grafico">
+                    <p id="lbUsoCPU" class="texto-grafico">Porcentagem de uso: <span id="labelGraficoUsoCPU"></span>%</p>
+                    <p id="lbTemp" class="texto-grafico">Temperatura: <span
+                            id="labelGraficoTemperatura"></span>°C</p>
+                    <p id="lbClock" class="texto-grafico">Clock: <span id="labelGraficoClock"></span>MHz</p>
+
+                    <span id="lbPercentD" class="texto-grafico" style="display: none;">Porcentagem de uso: <span
+                            id="labelGraficoPercentDisco"></span>%</span>
+                    <span id="lbGBD" class="texto-grafico" style="display: none;">Uso: <span
+                            id="labelGraficoGBDisco"></span>GB</span>
+
+                    <span id="lbPercentMem" class="texto-grafico" style="display: none;">Porcentagem de uso <span
+                            id="labelGraficoPercentMem"></span>%</span>
+                    <span id="lbGBMem" class="texto-grafico" style="display: none;">Uso: <span
+                            id="labelGraficoGBMem"></span>GB</span>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="div-botao">
+                <button onclick="alterarTela()" id="botao_muda_tela" class="botao-login">Voltar</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script src="script.js"></script>
+
+
+<script>
+    document.getElementById("tituloServidor").innerHTML = "Servidor " + sessionStorage.idServidor;
+    var contador = 0;
+
+    pegarDadosCpu(sessionStorage.idServidor)
+    pegarDadosMem(sessionStorage.idServidor)
+    pegarDadosDisco(sessionStorage.idServidor)
+    var ctx = document.getElementById('graficoTesteCPU');
+    var chartCPU = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'CPU',
+                fill: false,
+                backgroundColor: '#39b4db',
+                borderColor: '#39b4db',
+                data: [],
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#FFFFFF"
+
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('graficoTesteDisco');
+    var chartDisco = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Disco',
+                fill: false,
+                backgroundColor: '#d864d6',
+                borderColor: '#d864d6',
+                data: [],
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#FFFFFF"
+
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('graficoTesteMem');
+    var chartMem = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Memória',
+                fill: false,
+                backgroundColor: '#ff0066',
+                borderColor: '#ff0066',
+                data: [],
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#FFFFFF"
+
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('grafiquinhoCPU');
+    var chartinhoCPU = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+
+
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'CPU',
+                fill: false,
+                backgroundColor: '#39b4db',
+                borderColor: '#39b4db',
+                data: []
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#FFFFFF"
+
+                }
+            },
+            scales: {
+                yAxes: [{
+                    display: false,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+
+                xAxes: [{
+                    display: false
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('grafiquinhoDisco');
+    var chartinhoDisco = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+
+
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Disco',
+                fill: false,
+                backgroundColor: '#d864d6',
+                borderColor: '#d864d6',
+                data: []
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#FFFFFF"
+
+                }
+            },
+            scales: {
+                yAxes: [{
+                    display: false,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+
+                xAxes: [{
+                    display: false
+                }]
+            }
+        }
+    });
+
+
+    var ctx = document.getElementById('grafiquinhoMem');
+    var chartinhoMem = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+
+
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Memória',
+                fill: false,
+                backgroundColor: '#ff0066',
+                borderColor: '#ff0066',
+                data: []
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#FFFFFF"
+
+                }
+            },
+            scales: {
+                yAxes: [{
+                    display: false,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+
+                xAxes: [{
+                    display: false
+                }]
+            }
+        }
+    });
+
+    var loopCPU = setInterval(function(){
+        pegarDadosCpu(sessionStorage.idServidor)
+    }, 5000);
+    var loopDisco = setInterval(function(){
+        pegarDadosDisco(sessionStorage.idServidor)
+    }, 5000);
+    var loopMem = setInterval(function(){
+        pegarDadosMem(sessionStorage.idServidor)
+    }, 5000);
+    var usoCPU;
+
+    function gerarValoresCPU(arrayUso, arrayClock, arrayTemp) {
+
+
+        usoCPU = arrayUso[0].valor;
+        var dataUso = arrayUso[0].dataTempo;
+
+        console.log(dataUso);
+
+
+        let temperatura = arrayTemp[0].valor;
+        let clock = arrayClock[0].valor;
+
+        //let temperatura = parseInt(Math.random() * (60 - 40)) + 40;
+        //let clock = parseInt(Math.random() * (3500 - 1200)) + 1200;
+
+        console.log(temperatura);
+
+        contador++;
+
+        labeling('txtUsoCpu', 'txtTemperatura', 'txtClock', usoCPU, temperatura, clock, 'labelGraficoUsoCPU', 'labelGraficoTemperatura', 'labelGraficoClock');
+        if(usoCPU != "0.0"){
+            plotarGrafico(chartCPU, usoCPU,dataUso);
+            plotarGrafico(chartinhoCPU, usoCPU,dataUso);
+        }
+        
+    }
+
+    function gerarValoresDisco(arrayDiscoPercent, arrayDiscoGb) {
+
+        var usoDiscoGb = arrayDiscoGb[0].valor;
+        var usoDiscoPercent = arrayDiscoPercent[0].valor;
+        var dataUso = arrayDiscoGb[0].dataTempo;
+
+
+        labeling('txtUsoPDisco', 'txtUsoTDisco', null, usoDiscoPercent, usoDiscoGb,
+            null, 'labelGraficoPercentDisco', 'labelGraficoGBDisco', null);
+
+        if(usoDiscoPercent != "0.0"){
+            plotarGrafico(chartDisco, usoDiscoPercent,dataUso);
+            plotarGrafico(chartinhoDisco, usoDiscoPercent,dataUso);
+        }
+    }
+
+    function gerarValoresMemoria(arrayMemPercent, arrayMemGb) {
+
+        var usoMemGb = arrayMemGb[0].valor;
+        var usoMemPercent = arrayMemPercent[0].valor;
+
+        var dataUso = arrayMemPercent[0].dataTempo;
+
+        console.log(usoMemGb);
+        console.log(usoMemPercent)
+
+        labeling('txtUsoPRam', 'txtUsoTRam', null, usoMemPercent,usoMemGb, null, 'labelGraficoPercentMem', 'labelGraficoGBMem', null)
+
+        if(usoMemPercent != "0.0"){
+            plotarGrafico(chartMem, usoMemPercent,dataUso);
+            plotarGrafico(chartinhoMem, usoMemPercent,dataUso);
+        }
+        
+        
+    }
+
+    function plotarGrafico(grafico, dados,dataLeitura) {
+        grafico.data.datasets.forEach((dataset) => {
+            dataset.data.push(dados);
+        });
+
+        grafico.data.labels.push(dataLeitura);
+
+        if (contador > 17) {
+            grafico.data.labels.shift();
+            grafico.data.datasets.forEach((dataset) => {
+                dataset.data.shift();
+            });
+        }
+
+        grafico.update();
+    }
+
+
+    function mae(graficosim, graficonao, graficonaotbm, label1, label2, label3, label4, label5, label6, label7) {
+        mostrarGrafico(graficosim, graficonao, graficonaotbm);
+        mostrarLabel(label1, label2, label3, label4, label5, label6, label7);
+    }
+
+    function mostrarGrafico(graficoSim, GraficoNao, GraficoNaoTbm) {
+        graficoSim.style.display = "block";
+        GraficoNao.style.display = "none";
+        GraficoNaoTbm.style.display = "none";
+    }
+
+    function mostrarLabel(labelA, labelB, labelC, labelD, labelE, labelF, labelG) {
+        document.getElementById(labelA).style.display = "block";
+        document.getElementById(labelB).style.display = "block";
+
+        if (labelC == "lbUsoCPU") {
+            document.getElementById(labelC).style.display = "none";
+        }
+        else {
+            document.getElementById(labelC).style.display = "block";
+        }
+        document.getElementById(labelD).style.display = "none";
+        document.getElementById(labelE).style.display = "none";
+        document.getElementById(labelF).style.display = "none";
+        document.getElementById(labelG).style.display = "none";
+    }
+
+    function labeling(txtA, txtB, txtC, uso, usoDois, usoTres, textoGraficoFirst, textoGraficoSecond, textoGraficoThird) {
+        document.getElementById(txtA).innerHTML = `${uso}`;
+        document.getElementById(txtB).innerHTML = `${usoDois}`;
+        if (txtC != null) {
+            document.getElementById(txtC).innerHTML = `${usoTres}`;
+        }
+
+        document.getElementById(textoGraficoFirst).innerHTML = `${uso}`;
+        document.getElementById(textoGraficoSecond).innerHTML = `${usoDois}`;
+
+        if (textoGraficoThird != null) {
+            document.getElementById(textoGraficoThird).innerHTML = `${usoTres}`;
+
+        }
+    }
+
+    function alterarTelaServidor() {
+        clearInterval(loopCPU);
+        clearInterval(loopDisco);
+        clearInterval(loopMem);
+    }
+
+
+</script>

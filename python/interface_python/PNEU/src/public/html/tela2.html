@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PNEU INTERFACE</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-login">PNEU</div>
+      <div class="header-identificador">Servidores</div>
+      <div class="clear"></div>
+    </header>
+
+    <section class="texto-servidores">
+        
+        <div class="menu-gerente">
+            <div class="container">
+                <div class="filtro-gerente w80" style="float:left">
+                    <div class="w40" style="padding: 5px;">
+                        <span>Quantidade de servidores :</span>
+                        <input type="number" class="input-gerente" id="qntServidores">
+                    </div>
+                    <div class="w40">
+                        <span>Estado :</span>
+                        <select name="uf" id="ufServidor" class="select-gerente">
+                            <option value="Todos">Todos</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AM">AM</option>
+                            <option value="AP">AP</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MG">MG</option>
+                            <option value="MS">MS</option>
+                            <option value="MT">MT</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="PR">PR</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="RS">RS</option>
+                            <option value="SC">SC</option>
+                            <option value="SE">SE</option>
+                            <option value="SP">SP</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                    <div class="w20">
+                        <button class="botao-billing" id="botaoFiltrar" style="margin: 0;">Filtrar</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="w20" style="float: right;border-left: 1px solid #474747;padding-left: 40px;">
+                    <button class="botao-billing botao-logout" onclick="logout()">Logout</button>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="container">
+            <p class="texto-selecione">Selecione os servidores:</p>  
+        </div>   
+    </section>
+
+    <section class="section-servidores"> 
+        <div class="container">
+            <div class="main-holder" id="container-servidores">
+                
+                
+                <div class="clear"></div>
+                
+            </div>
+        </div>
+    </section>
+
+  </body>
+</html>
+
+<script>
+    var cargo = sessionStorage.cargo
+    if(cargo != "Analista"){
+        window.location.href = "index.html"
+    }
+    buscarServidores(0,"Todos",cargo)
+    
+    var botao = document.getElementById("botaoFiltrar");
+    botao.addEventListener("click",function() {
+        var qntServidores = Number(document.getElementById("qntServidores").value)
+        var estado = document.getElementById("ufServidor").value
+        buscarServidores(qntServidores,estado,cargo)
+    })
+</script>

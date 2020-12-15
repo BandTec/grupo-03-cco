@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PNEU INTERFACE</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-login">PNEU</div>
+      <div class="header-identificador">Login</div>
+      <div class="clear"></div>
+    </header>
+
+    <section class="section-login">
+      <div class="container">
+        <form id="form_login" class="formulario-login">
+          <div class="info-login">
+            <p class="texto-input">Login:</p>           
+            <input class="input-login" type="text" name="loginInput" id="loginInput">
+          </div>
+          <div class="info-login">
+            <p class="texto-input">Senha:</p>         
+            <input class="input-login" type="password" name="senhaInput" id="senhaInput">
+          </div>
+        </form>
+        <p class="pErro" id="pErro"></p>
+        <div class="div-botao">          
+          <button class="botao-login" onclick="pegarDadosLogin()">Entrar</button>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>

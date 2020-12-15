@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>Componentes</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-login">PNEU</div>
+        <div class="header-identificador">Billing <button onclick="alterarTela()" class="botao-login"
+                style="width: 100px; font-size: 16px; height: 30px;">Voltar</button></div>
+        <div class="clear"></div>
+    </header>
+    <section class="graficos">
+        <div style="width: 100%;">
+            <div class="box-grafico w60">
+                <div style="background-color: #2F2F2F;border-radius: 20px;">
+                    <p id="jurosBilling" class="titulo-billing">Previsão de gastos <span
+                            id="mes_juros"></span></p>
+                    <div class="grafico-juros">
+                        <canvas id="myChart" width="739" height="739" class="chartjs-render-monitor"
+                            style="display: block;width: 500px;height: 500px;"></canvas>
+                    </div>
+                    <div class="div-buttons">
+                        <button onclick="diminuirMes()" class="btn-juros left-j"><i class="fas fa-arrow-left"
+                                id="flecha_atras" style="color:#636363; display: none;"></i></button>
+                        <button onclick="aumentarMes()" class="btn-juros right-j"><i class="fas fa-arrow-right"  id="
+                                flecha_frente" style="display: none;"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="box-grafico w40">
+                <div style="background-color: #2F2F2F;border-radius: 20px;height: 555px;">
+                    <p id="gastosBilling" class="titulo-billing">Gasto do mês de <span
+                            id="mes_rosquinha">Janeiro</span></p>
+                    <div class="grafico-gastos">
+                        <canvas id="gastosMes" width="739" height="739" class="chartjs-render-monitor"
+                            style="display: block;width: 400px;height: 400px;"></canvas>
+                    </div>
+                    <div class="gastos-valores">
+                        <p style="font-size: 30px;margin: 20px;" id="valorTotalRosquinha">R$67,07</p>
+                        <p><span class="ec-gastos" style="color: #87E2FF;" id="valorEC2">EC2 R$42,25 </span><span
+                                style="color: #FF87C0;" class="ec-gastos" id="valorEBS">EBS R$14,08</span><span
+                                style="color: #EEFF87;" class="ec-gastos" id="valorS3">S3 R$10,73</span></p>
+                        <div class="div-buttons" style="width: 100%;padding-top: 25px;">
+                            <button onclick="diminuirMesGasto()" class="btn-juros left-j"><i class="fas fa-arrow-left"
+                                    id="flecha_atras_gasto" style="color:#636363;"></i></button>
+                            <button onclick="aumentarMesGasto()" class="btn-juros right-j"><i class="fas fa-arrow-right"
+                                    id="flecha_frente_gasto"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="box-grafico" style="width: 100%;">
+            <div style="background-color: #2F2F2F;border-radius: 20px;">
+                <p class="titulo-billing">Linha temporal do custo</p>
+                <div class="graficos-previsao">
+                    <canvas id="previsao" width="1300" height="639" class="chartjs-render-monitor"
+                        style="display: block;width: 400px;height: 400px; padding: 10px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    </div>
+
+</body>
+
+</html>
+<script>
+    var contadorMes = 0;
+    var contadorMesGasto = 0;
+    var mesAtualBarra = 'Setembro';
+    var mesAtualGasto = 'Outubro';
+    var valoresMesBarra = [67.07, 73.78, 81.16, 89.28, 98.21, 108.03];
+    var valoresMesGasto = [];
+    var MesGastoTotal;
+    var labelsBarra = [];
+    var labelsGasto = [];
+    var vazio = [];
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx2 = document.getElementById('gastosMes').getContext('2d');
+    var ctx3 = document.getElementById('previsao').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021', 'Abril - 2021', 'Maio - 2021', 'Junho - 2021'],
+            datasets: [{
+                label: 'Valor em R$',
+                data: [60.19, 60.4, 60.61, 60.82, 61.03, 61.24],
+                backgroundColor: [
+                    '#87E2FF',
+                    '#87E2FF',
+                    '#87E2FF',
+                    '#87E2FF',
+                    '#87E2FF',
+                    '#87E2FF'
+                ],
+                borderColor: [
+
+                ],
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontColor: 'white'
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'white'
+                    },
+                }]
+            }
+        }
+    });
+
+    var gastosMes = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['EC2', 'EBS', 'S3'],
+            datasets: [{
+                data: [36.55, 12.51, 9.87],
+                backgroundColor: [
+                    '#87E2FF',
+                    '#FF87C0',
+                    '#EEFF87',
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            duration: 2000
+        }
+    });
+
+    var previsaoFinal = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ['Outubro - 2020', 'Novembro - 2020', 'Dezembro - 2020', 'Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021'],
+            labels: ['Julho - 2020', 'Agosto - 2020', 'Setembro - 2020', 'Outubro - 2020', 'Novembro - 2020', 'Dezembro - 2020', 'Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021', 'Abril - 2021', 'Maio - 2021', 'Junho - 2021', 'Julho - 2021', 'Agosto - 2021', 'Setembro - 2021', 'Outubro - 2021'],
+            datasets: [{
+                label: 'Meses passados',
+                backgroundColor: '#39b4db',
+                data: [
+                    52.8,
+                    60.24,
+                    69.12,
+                    58.8,
+                    58.08,
+                    57.6,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            }, {
+                label: 'Forecast',
+                backgroundColor: '#d864d6',
+                data: [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    60.19,
+                    60.4,
+                    60.61,
+                    60.82,
+                    61.03,
+                    61.24,
+                    61.45,
+                    61.66,
+                    61.68,
+                    62.08
+                ]
+            }]
+        },
+        options: {
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontColor: 'white'
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'white'
+                    }
+                }]
+            }
+        }
+    });
+
+    function diminuirMes() {
+        if (contadorMes > 0) {
+            contadorMes--;
+            qualMesBarra(contadorMes);
+        }
+        else {
+            contador = 0;
+            qualMesBarra(contadorMes);
+        }
+    }
+
+    function aumentarMes() {
+        if (contadorMes < 6) {
+            contadorMes++;
+            qualMesBarra(contadorMes);
+
+        }
+        else {
+            contador = 6;
+            qualMesBarra(contadorMes);
+        }
+    }
+
+
+    function diminuirMesGasto() {
+        if (contadorMesGasto > 0) {
+            contadorMesGasto--;
+            //qualMesBarra(contadorMes);
+            qualMesGasto(contadorMesGasto);
+        }
+        else {
+            contadorMesGasto = 0;
+            //qualMesBarra(contadorMes);
+            qualMesGasto(contadorMesGasto);
+        }
+    }
+
+    function aumentarMesGasto() {
+        if (contadorMesGasto < 8) {
+            contadorMesGasto++;
+            //qualMesBarra(contadorMes);
+            qualMesGasto(contadorMesGasto);
+        }
+        else {
+            contador = 8;
+            //qualMesBarra(contadorMes);
+            qualMesGasto(contadorMesGasto);
+        }
+    }
+
+    function qualMesGasto(mes) {
+        if (mes == 0) {
+            var valorGasto = [37.55, 12.51, 9.87];
+            var mesAtualGasto = 'Janeiro';
+            MesGastoTotal = 60.19;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+            flechinhaTrasCinza(flecha_atras_gasto);
+        }
+        else if (mes == 1) {
+
+            var valorGasto = [37.68, 12.56, 9.90];
+            var mesAtualGasto = 'Fevereiro';
+            MesGastoTotal = 60.40;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+            flechinhaTrasBranca(flecha_atras_gasto);
+        }
+        else if (mes == 2) {
+            var valorGasto = [37.82, 12.60, 9.94];
+            var mesAtualGasto = 'Março';
+            MesGastoTotal = 60.61;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+        }
+        else if (mes == 3) {
+            var valorGasto = [37.95, 12.65, 9.97];
+            var mesAtualGasto = 'Abril';
+            MesGastoTotal = 60.82;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+        }
+        else if (mes == 4) {
+            var valorGasto = [38.08, 12.69, 10.00];
+            var mesAtualGasto = 'Junho';
+            MesGastoTotal = 61.03;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+
+        }
+        else if (mes == 5) {
+            var valorGasto = [38.21, 12.73, 10.04];
+            var mesAtualGasto = 'Julho';
+            MesGastoTotal = 61.24;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+        }
+        else if (mes == 6) {
+            var valorGasto = [38.34, 12.78, 10.07];
+            var mesAtualGasto = 'Agosto';
+            MesGastoTotal = 61.45;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+        }
+        else if (mes == 7) {
+            var valorGasto = [38.47,12.82,10.11];
+            var mesAtualGasto = 'Setembro';
+            MesGastoTotal = 61.66;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+            flechinhaFrenteBranca(flecha_frente_gasto);
+
+        }
+        else {
+            var valorGasto = [38.48,12.82,10.11];
+            var mesAtualGasto = 'Outubro';
+            MesGastoTotal = 61.68;
+            manipulaVetorGasto(valorGasto);
+            printaMes(mes_rosquinha, mesAtualGasto, MesGastoTotal, valorGasto);
+
+            flechinhaFrenteCinza(flecha_frente_gasto);
+
+        }
+    }
+
+    function qualMesBarra(mes) {
+        if (mes == 0) {
+
+            var mes0 = ['Outubro - 2020', 'Novembro - 2020', 'Dezembro - 2020', 'Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021'];
+            var valor0 = [67.07, 73.78, 81.16, 89.28, 98.21, 108.03];
+            mesAtualBarra = 'Setembro';
+
+            manipulaVetorBarra(mes0, valor0);
+            printaMes(mes_juros, mesAtualBarra);
+
+            flechinhaTrasCinza(flecha_atras);
+        }
+        else if (mes == 1) {
+
+            var mes1 = ['Novembro - 2020', 'Dezembro - 2020', 'Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021', 'Abril - 2021'];
+            var valor1 = [66.97, 73.67, 81.04, 89.14, 98.05, 107.86]
+            mesAtualBarra = 'Outubro';
+
+            manipulaVetorBarra(mes1, valor1);
+            printaMes(mes_juros, mesAtualBarra);
+
+            flechinhaTrasBranca(flecha_atras);
+        }
+        else if (mes == 2) {
+
+            var mes2 = ['Dezembro - 2020', 'Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021', 'Abril - 2021', 'Maio - 2021'];
+            var valor2 = [66.87, 73.56, 80.92, 89.01, 97.91, 107.70]
+            mesAtualBarra = 'Novembro';
+
+            manipulaVetorBarra(mes2, valor2);
+            printaMes(mes_juros, mesAtualBarra);
+        }
+        else if (mes == 3) {
+
+            var mes3 = ['Janeiro - 2021', 'Fevereiro - 2021', 'Março - 2021', 'Abril - 2021', 'Maio - 2021', 'Junho - 2021'];
+            var valor3 = [66.77, 73.45, 80.80, 88.88, 97.77, 107.55];
+            mesAtualBarra = 'Dezembro';
+
+            manipulaVetorBarra(mes3, valor3);
+            printaMes(mes_juros, mesAtualBarra);
+        }
+        else if (mes == 4) {
+
+            var mes4 = ['Fevereiro - 2021', 'Março - 2021', 'Abril - 2021', 'Maio - 2021', 'Junho - 2021', 'Julho - 2021'];
+            var valor4 = [66.67, 73.34, 80.67, 88.74, 97.61, 107.37];
+            mesAtualBarra = 'Janeiro';
+
+            manipulaVetorBarra(mes4, valor4);
+            printaMes(mes_juros, mesAtualBarra);
+        }
+        else if (mes == 5) {
+            var mes5 = ['Março - 2021', 'Abril - 2021', 'Maio - 2021', 'Junho - 2021', 'Julho - 2021', 'Agosto - 2021'];
+            var valor5 = [66.57, 73.23, 80.55, 88.61, 97.47, 107.22];
+            mesAtualBarra = 'Fevereiro';
+
+            manipulaVetorBarra(mes5, valor5);
+            printaMes(mes_juros, mesAtualBarra);
+            flechinhaFrenteBranca(flecha_frente);
+        }
+        else {
+
+            var mes6 = ['Abril - 2021', 'Maio - 2021', 'Junho - 2021', 'Julho - 2021', 'Agosto - 2021', 'Setembro - 2021'];
+            var valor6 = [66.47, 73.12, 80.43, 88.47, 97.32, 107.05];
+            mesAtualBarra = 'Março';
+
+            manipulaVetorBarra(mes6, valor6);
+            printaMes(mes_juros, mesAtualBarra);
+
+            flechinhaFrenteCinza(flecha_frente);
+        }
+    }
+
+    function manipulaVetorBarra(meses, valores) {
+        labelsBarra = vazio;
+        valoresMesBarra = vazio;
+
+        labelsBarra = meses;
+        valoresMesBarra = valores;
+
+        myChart.data.datasets.forEach((dataset) => {
+            dataset.data = valoresMesBarra;
+        });
+
+        myChart.data.labels = labelsBarra;
+        myChart.update();
+    }
+
+    function manipulaVetorGasto(valores) {
+        gastosMes.data.datasets.forEach((dataset) => {
+            dataset.data = valores;
+        });
+
+        gastosMes.update();
+    }
+
+    function printaMes(idMes, mes, valorRosquinha, arrayRosquinha) {
+        idMes.innerHTML = `${mes}`;
+
+        if (valorRosquinha != null) {
+            valorTotalRosquinha.innerHTML = `R$${valorRosquinha}`
+
+            valorEC2.innerHTML = `EC2 R$${arrayRosquinha[0]}`;
+            valorEBS.innerHTML = `EBS R$${arrayRosquinha[1]}`;
+            valorS3.innerHTML = `S3 R$${arrayRosquinha[2]}`;
+
+        }
+    }
+
+    function flechinhaTrasCinza(idFlecha) {
+        idFlecha.style.color = '#636363';
+    }
+
+    function flechinhaTrasBranca(idFlecha) {
+        idFlecha.style.color = 'white';
+    }
+
+    function flechinhaFrenteCinza(idFlecha) {
+        idFlecha.style.color = '#636363';
+    }
+
+    function flechinhaFrenteBranca(idFlecha) {
+        idFlecha.style.color = 'white';
+    }
+
+
+</script>

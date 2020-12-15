@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PNEU INTERFACE</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-login">PNEU</div>
+        <div class="header-identificador">Monitoramento</div>
+        <div class="clear"></div>
+    </header>
+
+    <section class="servidores">
+        <div class="menu-gerente">
+            <div class="container">
+                <div class="filtro-gerente w70" style="float:left">
+                    <div class="w40" style="padding: 5px;">
+                        
+                        <span>Quantidade de servidores :</span>
+                        <input type="number" class="input-gerente" id="qntServidores">
+                    </div>
+                    <div class="w30">
+                        <span>Estado :</span>
+                        <select name="uf" id="ufServidor" class="select-gerente">
+                            <option value="Todos">Todos</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AM">AM</option>
+                            <option value="AP">AP</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MG">MG</option>
+                            <option value="MS">MS</option>
+                            <option value="MT">MT</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="PR">PR</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="RS">RS</option>
+                            <option value="SC">SC</option>
+                            <option value="SE">SE</option>
+                            <option value="SP">SP</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                    <div class="w20">
+                        <button class="botao-billing" id="botaoFiltrar" style="margin: 0;">Filtrar</button>
+                    </div>
+                    <div class="w10">
+                        <i class="far fa-question-circle" style="font-size: 30px;padding: 5px;"></i>
+                        <div class="legenda" id="legenda">
+                            <div class="legenda-item"><div class="legenda-cor" style="background-color: #4d4d4d"></div>Não monitorado</div>
+                            <div class="legenda-item"><div class="legenda-cor" style="background-color: #FF5B5B"></div>Acima do limite</div>
+                            <div class="legenda-item"><div class="legenda-cor" style="background-color: #EEFF87"></div>Atenção, próximo ao limite</div>
+                            <div class="legenda-item"><div class="legenda-cor" style="background-color: #A6FF87"></div>Seguro</div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="w30" style="float: right;border-left: 1px solid #474747;padding-left: 40px;">
+                    <button class="botao-billing" onclick="mudarBilling()">Billing</button>
+                    <button class="botao-billing botao-logout" onclick="logout()">Logout</button>
+                    <div class="clear"></div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="container" id="container-servidores">
+            <div class="clear"></div>
+            <div id="semServidor" class="sem-servidor">
+                <div class="sem-servidor-img">
+                    <img src="Pato.png">
+                </div>
+                <p>Nenhum servidor foi encontrado</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+    var qntServidores = ""
+    var estado = ""
+    var cargo = sessionStorage.cargo
+    if(cargo != "Gerente"){
+        window.location.href = "index.html"
+    }
+    buscarServidores(0,"Todos",cargo)
+    var loop = setInterval(function(){
+        qntServidores = Number(document.getElementById("qntServidores").value)
+        estado = document.getElementById("ufServidor").value
+        buscarServidores(qntServidores,estado,cargo)
+    },10000)
+    var botao = document.getElementById("botaoFiltrar");
+    botao.addEventListener("click",function() {
+        qntServidores = Number(document.getElementById("qntServidores").value)
+        estado = document.getElementById("ufServidor").value
+        buscarServidores(qntServidores,estado,cargo)
+    })
+</script>
+
+<script>
+    $(document).ready(function(){
+      $("i").hover(function(){
+        $("#legenda").css("display", "block");
+        }, function(){
+            $("#legenda").css("display", "none");  
+      });
+    });
+    </script>
