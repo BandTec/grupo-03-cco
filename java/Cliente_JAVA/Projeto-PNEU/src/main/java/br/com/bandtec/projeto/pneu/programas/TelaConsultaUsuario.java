@@ -201,7 +201,7 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                 con = DriverManager.getConnection(ConexaoBanco.URL, ConexaoBanco.USER, ConexaoBanco.PASSWORD);
                 
                 // Verifica se algum dos campos está vazio
-                String query = "delete from usuario where nick like ?;";
+                String query = "delete from Usuario where nick like ?;";
                 PreparedStatement preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString(1, nick);
                 
