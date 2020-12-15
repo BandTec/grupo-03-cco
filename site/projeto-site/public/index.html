@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <style>
+        html{scroll-behavior: smooth;}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- FOLHA DE ESTILO NOSSA-->
+    <link rel="stylesheet" href="src/css/style.css">
+    <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vaibhav111tandon/vov.css@latest/vov.css ">
+    <!--Icone da aba [ guia ] do navegador-->
+    <link rel="shortcut icon" href="src/img/wheel.png" type="image/x-icon">
+
+    <!-- Fonts utilizadas -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <title>Pneu - Home</title>
+</head>
+
+<body>
+    <!-- INICIO DO HEADER [CABEÇALHO] -  ABAIXO FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+    <header>
+        <div class="container">
+            <h1 class="middle middle2">
+               <a href="index.html"><img src="src/img/logo.png" alt="Logo do PNEU" class="icon-header"></a>
+            </h1>
+            <nav class="container menu-desktop">
+                <h1 class="middle">
+                    <a href="index.html"><img src="src/img/logo.png" alt="Logo do PNEU" class="icon-header"></a>
+                 </h1>
+                <ul class="middle">
+                    <li>
+                        <a class="link page" href="index.html" class="current">Home</a>
+                    </li>
+                    <li>
+                        <a class="link" href="sobre.html">Sobre</a>
+                    </li>
+                    <li>
+                        <a class="link" href="projeto.html">Projeto</a>
+                    </li>
+                    <li>
+                        <a class="link" href="equipe.html">Equipe</a>
+                    </li>
+                    <li>
+                        <a class="link" href="login.html">Login</a>
+                    </li>
+                    <li>
+                        <a class="link" href="cadastro.html"><button class="btnCadastrar">Cadastre-se</button></a>
+                    </li>
+                </ul>
+            </nav>
+    
+            <nav class="container menu-mobile">
+                <h2><i class="fas fa-bars"></i></h2>
+                <ul>
+                    <li class="selected">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="sobre.html">Sobre</a>
+                    </li>
+                    <li>
+                        <a href="projeto.html">Projeto</a>
+                    </li>
+                    <li>
+                        <a href="equipe.html">Equipe</a>
+                    </li>
+                    <li>
+                        <a href="login.html">Login</a>
+                    </li>
+                    <li>
+                        <a href="cadastro.html">Cadastro</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="clear"></div>
+        </div>
+    </header>
+    <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+
+    <!-- INICIO DO MAIN-  ONDE O CONTEÚDO DA PAGINA ALTERA-->
+    <main>
+
+        <section class="imgHome">
+            <div class="container">
+                    <div class="textoHome w50">
+                        <p class="textoChamada"><span class="highlight">P</span>rojetando</p>
+                        <p class="textoChamada"><span class="highlight">N</span>úmeros</p>
+                        <p class="textoChamada"><span class="highlight">E</span>xecutando</p>
+                        <p class="textoChamada"><span class="highlight">U</span>pgrades</p>
+                    </div>
+                    <div class="chamada w50">
+                        <p style="font-size: 18px;">Excelência em monitoramento e segurança em uma única solução.</p>
+                        <p style="font-size: 18px; text-align: center;">Conheça a <span style="color: #03ADE3; font-weight: bold;">PNEU</span>!</p>
+                        <button class="btnCadastrarChamada" onclick="redirecionarCadastro()">Cadastre-se gratuitamente</button>
+                    </div>
+                    <div class="clear"></div>
+            </div>
+        </section>
+
+        <section class="caracteristicas">
+            <div class="container">
+                <div id="divCarac" class="divisaoHome">
+                    <span class="texto">Características</span>
+                </div>
+                
+                <div class="itens-home">
+                    <div class="w33 box-item-home">
+                        <div class="item">
+                            <img src="src/img/computer-charts.png" alt="">
+                            <p>Visualização fácil de todas as informações</p>
+                        </div>
+                    </div>
+                    <div class="w33 box-item-home">
+                        <div class="item">
+                            <img src="src/img/road-points.png" alt="">
+                            <p>Acompanhamento ao longo de toda a via</p>
+                        </div>
+                    </div>
+                    <div class="w33 box-item-home">
+                        <div class="item">
+                            <img src="src/img/stonks.png" alt="">
+                            <p>Melhor utilização dos gastos</p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+        
+                <div class="divComercial">
+        
+                    <button class="texto" onclick="redirecionarSimu()">
+                        Faça a simulação de lucros agora mesmo!
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    <!-- FIM DO MAIN-  ONDE O CONTEÚDO DA PAGINA ALTERA-->
+
+    <!-- INICIO DO FOOTER [RODAPÉ] -->
+    <footer>
+        <p class="container">
+            &copy;2020 - Projeto<span class="highlight" role="text">Pneu</span>. <span class="footerDesenv">Desenvolvido com
+                <span class="highlight" role="text"> ❤</span> por
+                <span class="highlight" role="text"> { DuckDevelopers } </span></span> 
+        </p>
+    </footer>
+    <!-- FIM DO FOOTER [RODPÉ] -->
+
+    <!-- ABAIXO DESTE COMENTÁRIO FICARÁ AS CHAMADAS DE SCRIPTS JS -->
+    <!-- Script javascript nosso -->
+    <script src="src/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $('nav.menu-mobile h2').click(function(){
+            $('nav.menu-mobile ul').slideToggle();
+        });
+    </script>
+</body>
+
+</html>

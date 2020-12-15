@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- FOLHA DE ESTILO NOSSA-->
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/styledas.css">
+    <!-- FOLHA DE ESTILO DE ANIMAÇÕES [OPICIONAL]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vaibhav111tandon/vov.css@latest/vov.css ">
+    <!--Icone da aba [ guia ] do navegador-->
+    <link rel="shortcut icon" href="src/img/wheel.png" type="image/x-icon">
+
+    <!-- Fonts utilizadas -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <title>Pneu - Perfil</title>
+</head>
+
+<body>
+    <!-- INICIO DO HEADER [CABEÇALHO] -  ABAIXO FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+    <header>
+        <div class="container">
+            <h1 class="middle middle2">
+               <a href="perfil.html"><img src="src/img/logo.png" alt="Logo do PNEU" class="icon-header"></a>
+            </h1>
+            <nav class="container menu-desktop">
+                <h1 class="middle">
+                    <a href="perfil.html"><img src="src/img/logo.png" alt="Logo do PNEU" class="icon-header"></a>
+                 </h1>
+                <ul class="middle">
+                    <li>
+                        <a class="link" href="Dashboard.html" class="current">Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="link page" href="perfil.html">Perfil</a>
+                    </li>
+                    <li>
+                        <a class="link"><button class="logout" onclick="logout()">Logout</button></a>
+                    </li>
+                </ul>
+            </nav>
+    
+            <nav class="container menu-mobile">
+                <h2><i class="fas fa-bars"></i></h2>
+                <ul>
+                    <li>
+                        <a href="Dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="selected">
+                        <a href="perfil.html">Perfil</a>
+                    </li>
+                    <li class="logout">
+                        <a href="cadastro.html">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="clear"></div>
+        </div>
+    </header>
+    <!-- FIM DO HEADER [CABEÇALHO] -  ACIMA FICARÁ O LOGTIPO E MENU DE NAVEGAÇÃO-->
+
+    <main class="margin-main">
+        <div class="container">
+            <div class="bg-perfil" id="boxPerfil">
+
+                
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="container">
+            &copy;2020 - Projeto<span class="highlight" role="text">Pneu</span>. <span class="footerDesenv">Desenvolvido com
+                <span class="highlight" role="text"> ❤</span> por
+                <span class="highlight" role="text"> { DuckDevelopers } </span></span> 
+        </p>
+    </footer>
+    <!-- FIM DO FOOTER [RODPÉ] -->
+
+    <!-- ABAIXO DESTE COMENTÁRIO FICARÁ AS CHAMADAS DE SCRIPTS JS -->
+    <!-- Script javascript nosso -->
+    <script src="src/js/instascan.min.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="src/js/script.js"></script>
+    <script>
+        $('nav.menu-mobile h2').click(function(){
+            $('nav.menu-mobile ul').slideToggle();
+        });
+    </script>
+    <!-- js do fontawsome icones-->
+    <script src="https://kit.fontawesome.com/29db2d61c6.js" crossorigin="anonymous"></script>
+    <script>
+        var cargo = sessionStorage.cargo_usuario_meuapp
+        if(cargo == "Gerente"){
+            document.getElementById("boxPerfil").innerHTML = `
+            <div class="w30 box-perfil">
+                    <div class="box-perfil-QR">
+                        <h1>Meu Perfil</h1>
+                        <div class="box-perfil-QR-camera">
+                            <video id="Camera" autoplay="true"></video>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w30 box-perfil">
+                    <div class="box-perfil-branco">
+                        <div class="box-info">
+                            <h1>Nome da empresa:</h1>
+                            <p id="txtNomeCliente">Empresa</p>
+                        </div>
+                        <div class="box-info">
+                            <h1>CNPJ:</h1>
+                            <p id="txtCNPJ">00.000.000/0000-00</p>
+                        </div>
+                        <div class="box-info">
+                            <h1>Nome:</h1>
+                            <p id="txtNomeUsuario">Nome</p>
+                        </div>
+                        <div class="box-info">
+                            <h1>Cargo:</h1>
+                            <p id="txtCargo">Cargo</p>
+                        </div>
+                        <div class="box-info-btn">
+                            <button class="btnEditar">Editar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w40 box-perfil">
+                    <div class="box-perfil-branco">
+                        <h1 style="text-align: center;">Dados das rodovias</h1>
+                        <div id="boxHighwaysData">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            `
+        }else{
+            document.getElementById("boxPerfil").innerHTML = `
+                <div class="w40 box-perfil">
+                    <div class="box-perfil-branco">
+                        <div class="box-info">
+                            <h1>Nome da empresa:</h1>
+                            <p id="txtNomeCliente">Empresa</p>
+                        </div>
+                        <div class="box-info">
+                            <h1>CNPJ:</h1>
+                            <p id="txtCNPJ">00.000.000/0000-00</p>
+                        </div>
+                        <div class="box-info">
+                            <h1>Nome:</h1>
+                            <p id="txtNomeUsuario">Nome</p>
+                        </div>
+                        <div class="box-info">
+                            <h1>Cargo:</h1>
+                            <p id="txtCargo">Cargo</p>
+                        </div>
+                        <div class="box-info-btn">
+                            <button class="btnEditar">Editar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w60 box-perfil">
+                    <div class="box-perfil-branco">
+                        <h1 style="text-align: center;">Dados das rodovias</h1>
+                        <div id="boxHighwaysData">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            `
+        }
+        function buscarDados() {
+
+            let nomeUsuario = document.getElementById('txtNomeUsuario');
+            let cargoUsuario = document.getElementById('txtCargo');
+            let cnpjCliente = document.getElementById('txtCNPJ');
+            let nomeCliente = document.getElementById('txtNomeCliente');
+
+            const id = parseInt(sessionStorage.id_usuario_meuapp);
+            const fk = parseInt(sessionStorage.fk_usuario_meuapp);
+
+            nomeUsuario.innerHTML = sessionStorage.nome_usuario_meuapp;
+            cargoUsuario.innerHTML = sessionStorage.cargo_usuario_meuapp;
+
+            fetch(`/usuarios/buscar/${id}/${fk}`, { method: 'GET' })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Response: OK');
+                        response.json().then(result => {
+                            let dados = result;
+                            console.log(dados);
+                            nomeCliente.innerHTML = dados[0].nomeCliente;
+                            cnpjCliente.innerHTML = dados[0].CNPJ;
+                        });
+                    }
+                });
+            rodoviasDoCliente(fk);
+        }
+
+        buscarDados();
+
+        function rodoviasDoCliente(cliente) {
+            let divRodovias = document.getElementById('boxHighwaysData');
+            fetch(`/leituras/pegarRodoviasBD/${cliente}`).then(response => {
+                console.log('Fetch ok');
+                if (response.ok) {
+                    console.log('Response: OK');
+                    return response.json().then(function (retornoBD) {
+                        console.log(retornoBD);
+                        rodoviasObtidas = retornoBD;
+
+                        for (var i = 0; i < rodoviasObtidas.length; i++) {
+                            console.log('Rodovia da vez: ' + rodoviasObtidas[i].nomeRodovia);
+                            divRodovias.innerHTML += `                    
+                              <div class="card-rodovias">
+                                  <p class="title-card-rodovias">${rodoviasObtidas[i].nomeRodovia}</p>
+                                <button class="btnEditar" disabled>
+                                    <span class="text-btn">
+                                        Editar
+                                    </span>
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                              </div>`;
+                        }
+                    });
+                }
+            });
+            console.log('Depois do fetch :(');
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        const scanner = new Instascan.Scanner({
+            video: document.getElementById('Camera')
+        })
+        scanner.addListener('scan',content =>{
+            requisicao(content);
+        })
+        Instascan.Camera.getCameras().then(cameras =>{
+            if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+            } else {
+            console.error('No cameras found.');
+            }
+        })
+    </script>
+
+</body>
+
+</html>
