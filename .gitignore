@@ -64,3 +64,11 @@ typings/
 
 .directory
 package-lock.json
+
+#Ambientes virtuais python
+__pycache__
+env
+windowsenv
+TESTEPNEU
+virtual_pneu
+/nbproject/private/
