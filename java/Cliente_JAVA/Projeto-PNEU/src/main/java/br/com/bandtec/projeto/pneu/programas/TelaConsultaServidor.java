@@ -289,18 +289,13 @@ public class TelaConsultaServidor extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null,"O servidor selecionado foi deletado","Servidor deletado",JOptionPane.INFORMATION_MESSAGE);
 
                                 String msg = "O servidor "+nomeServidor+" foi deletado.";
-                                        try {
-                                            Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Servidor foi deletado");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                                String titulo = "Exclusão de servidor executada";
+                                try {
+                                    Issue novaIssue = new Issue();
+                                    ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                                }
 
                             } catch (ClassNotFoundException | SQLException ex) {
                                 Logger.getLogger(TelaConsultaComponente.class.getName()).log(Level.SEVERE, null, ex);

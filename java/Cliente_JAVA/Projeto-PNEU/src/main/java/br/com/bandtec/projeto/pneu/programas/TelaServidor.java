@@ -9,8 +9,6 @@ import br.com.bandtec.projeto.pneu.clienteJira.ConexaoAPIJira;
 import br.com.bandtec.projeto.pneu.modelos.ConexaoBanco;
 import br.com.bandtec.projeto.pneu.modelos.Issue;
 import br.com.bandtec.projeto.pneu.modelos.Servidor;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -132,17 +130,11 @@ public class TelaServidor extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(null,"Cadastro do Servidor feito com sucesso!","Cadastro bem sucedido",JOptionPane.INFORMATION_MESSAGE);
                     
-                    String msg = "O servidor "+servidor.getNomeServidor()+" foi cadastrado";
+                    String msg = "O servidor "+servidor.getNomeServidor()+" foi cadastrado no endereço: "+servidor.getEstadoServidor()+" - "+servidor.getCidadeServidor()+", "+servidor.getBairroServidor()+".";
+                    String titulo = "Cadastro de servidor executado";
                     try {
                         Issue novaIssue = new Issue();
-                        novaIssue.setProjectKey("BDJ");
-                        novaIssue.setSummary(msg);
-                        novaIssue.setDescription("Cadastro de servidor foi executado");
-//                        novaIssue.setLabels("Castro", "Lindo");
-                        ConexaoAPIJira.criacao(novaIssue);
-
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        System.out.println("Issue criada: "+gson.toJson(novaIssue));
+                        ConexaoAPIJira.criacao(novaIssue, msg, titulo);
                     } catch (IOException ex) {
                         Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
                     }

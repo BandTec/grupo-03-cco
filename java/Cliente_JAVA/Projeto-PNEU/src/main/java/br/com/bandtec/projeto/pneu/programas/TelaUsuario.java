@@ -98,17 +98,10 @@ public class TelaUsuario extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Cadastro de usuário feito com sucesso!","Cadastro bem sucedido",JOptionPane.INFORMATION_MESSAGE);
                     
                     String msg = "O usuário "+usuario.getNome()+" foi cadastrado(a).";
-                    
+                    String titulo = "Cadastro de usuário executado";
                     try {
                         Issue novaIssue = new Issue();
-                        novaIssue.setProjectKey("BDJ");
-                        novaIssue.setSummary(msg);
-                        novaIssue.setDescription("Cadastro de usuário foi executado");
-//                        novaIssue.setLabels("Castro", "Lindo");
-                        ConexaoAPIJira.criacao(novaIssue);
-
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        System.out.println("Issue criada: "+gson.toJson(novaIssue));
+                        ConexaoAPIJira.criacao(novaIssue, msg, titulo);
                     } catch (IOException ex) {
                         Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
                     }

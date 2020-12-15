@@ -5,6 +5,7 @@
  */
 package br.com.bandtec.projeto.pneu.programas;
 
+import br.com.bandtec.projeto.pneu.clienteJira.ClienteJiraApi;
 import br.com.bandtec.projeto.pneu.clienteJira.ConexaoAPIJira;
 import br.com.bandtec.projeto.pneu.modelos.Componente;
 import br.com.bandtec.projeto.pneu.modelos.ConexaoBanco;
@@ -152,16 +153,11 @@ public class TelaComponente extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(null,"Cadastro da Metrica feito com sucesso!","Cadastro bem sucedido",JOptionPane.INFORMATION_MESSAGE);
                     
-                    String msg = "O componente "+componente.getComponente()+" foi cadastrado no servidor "+componente.getServidorComponente();
+                    String msg = "O componente "+tipo+" foi cadastrado no servidor "+componente.getServidorComponente();
+                    String titulo = "Cadastro de componente executado";
                     try {
                         Issue novaIssue = new Issue();
-                        novaIssue.setProjectKey("BDJ");
-                        novaIssue.setSummary(msg);
-                        novaIssue.setDescription("Cadastro de componente foi executado");
-                        ConexaoAPIJira.criacao(novaIssue);
-
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        System.out.println("Issue criada: "+gson.toJson(novaIssue));
+                        ConexaoAPIJira.criacao(novaIssue, msg, titulo);
                     } catch (IOException ex) {
                         Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
                     }

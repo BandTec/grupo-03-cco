@@ -222,6 +222,7 @@ public class TelaEdicaoServidor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar2ActionPerformed
@@ -316,37 +317,52 @@ public class TelaEdicaoServidor extends javax.swing.JFrame {
                                         JOptionPane.showMessageDialog(null, "Servidor editado com sucesso");
                                         
                                         String msg = "O servidor "+nomeAtual+" foi editado para "+novoNome+" e sua localização foi editada para "+novoEstado+" - "+novoEndereco+".";
+                                        String titulo = "Edição de servidor executada";
                                         try {
                                             Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Servidor foi editado");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
+                                            ConexaoAPIJira.criacao(novaIssue, msg, titulo);
                                         } catch (IOException ex) {
                                             Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
                                         }
+                                        
+                                        TelaConsultaServidor frameConsulta = new TelaConsultaServidor();
+                                        frameConsulta.setVisible(true);
+                                        try {
+                                            Class.forName(ConexaoBanco.DRIVER);
+                                            con = DriverManager.getConnection(ConexaoBanco.URL, ConexaoBanco.USER, ConexaoBanco.PASSWORD);
+                                            String SQLSelectServidor = "select * from Servidor, Localizacao where fkLocalizacao = idLocalizacao;";
+                                            ResultSet rsServidor = stm.executeQuery(SQLSelectServidor);
+                                            DefaultListModel dlm = new DefaultListModel();   
+                                            while(rsServidor.next()) {
+                                                String nomeServidor = rsServidor.getString("nomeServidor");
+                                                String estadoServidor = rsServidor.getString("estado");
+                                                String cidadeServidor = rsServidor.getString("cidade");
+                                                String bairroServidor = rsServidor.getString("bairro");
+                                                dlm.addElement(nomeServidor +": "+estadoServidor+" - "+cidadeServidor+", "+bairroServidor);
+                                            }
+                                            String SQLSelectEstado = "select distinct (estado) from Localizacao;";
+                                            ResultSet rsEstado = stm.executeQuery(SQLSelectEstado);
+                                            frameConsulta.jcbEstado.addItem("Todos");
+                                            while(rsEstado.next()) {
+                                                frameConsulta.jcbEstado.addItem(rsEstado.getString("estado"));
+                                            }
+                                            frameConsulta.jlListaCadastro.setModel(dlm);  
+                                            dispose();
+                                        } catch (ClassNotFoundException | SQLException ex) {
+                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                                        } finally { 
+                                                try{ 
+                                                    con.close(); // Após finalizar processo, fecha a conexão
+                                                }catch(SQLException onConClose){
+                                                    System.out.println("Houve erro no fechamento da conexão");
+                                                    JOptionPane.showMessageDialog(null,"Erro na conexão, com o banco de dados!","Erro de conexão",JOptionPane.WARNING_MESSAGE);
+                                                    onConClose.printStackTrace();
+                                                }
+                                            }
                                 } else {
                                     JOptionPane.showMessageDialog(null,"O servidor não pode ser editado com os valores antigos","Erro ao editar servidor",JOptionPane.ERROR_MESSAGE);
                                 }
-                                    
-                                        
-
-                                    
-                                    // Cria o java mysql update preparedstatement
-
-
-                                    // executa o java preparedstatement
-
-                                    //nickAtual = novoNick;
-
-                                    // Mensagem de sucesso de edição
-                                    
-
-                                    
-
+                                
                                 con.close();
 
                             } catch (ClassNotFoundException | SQLException ex) {

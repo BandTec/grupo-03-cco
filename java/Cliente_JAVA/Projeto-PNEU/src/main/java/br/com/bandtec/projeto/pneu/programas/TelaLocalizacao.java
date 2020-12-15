@@ -89,19 +89,13 @@ public class TelaLocalizacao extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Cadastro de Localização feito com sucesso!","Cadastro bem sucedido",JOptionPane.INFORMATION_MESSAGE);
                 
                 String msg = "A localização "+localizacao.getEstado()+" - "+localizacao.getCidade()+", "+localizacao.getCidade()+", "+localizacao.getBairro()+", "+localizacao.getNumero()+" foi cadastrada.";
-                    try {
-                        Issue novaIssue = new Issue();
-                        novaIssue.setProjectKey("BDJ");
-                        novaIssue.setSummary(msg);
-                        novaIssue.setDescription("Cadastro de uma nova localização foi executado");
-//                        novaIssue.setLabels("Castro", "Lindo");
-                        ConexaoAPIJira.criacao(novaIssue);
-
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        System.out.println("Issue criada: "+gson.toJson(novaIssue));
-                    } catch (IOException ex) {
-                        Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                String titulo = "Cadastro de localização executado";
+                try {
+                    Issue novaIssue = new Issue();
+                    ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 // Limpa campos após cadastro feito com sucesso
                 tfCidade.setText("");

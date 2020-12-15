@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -136,8 +137,8 @@ public class TelaConsultaComponente extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -200,7 +201,7 @@ public class TelaConsultaComponente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(116, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcbFiltro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -283,6 +284,7 @@ public class TelaConsultaComponente extends javax.swing.JFrame {
         
                         String[] separar1 = selecionado.split(": ");
                         String Servidor = separar1[0];
+                        String TipoMetrica = separar1[1];
                         String[] separar2 = separar1[1].split(" - ");
                         String tipo = separar2[0];
                         String metrica = separar2[1];
@@ -334,20 +336,14 @@ public class TelaConsultaComponente extends javax.swing.JFrame {
 
                                     JOptionPane.showMessageDialog(null,"O componente selecionado foi deletado","Componente deletado",JOptionPane.INFORMATION_MESSAGE);
 
-                                    String msg = "O componente foi deletado do servidor "+Servidor+".";
-                                        try {
-                                            Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Exclusão de componente foi executada");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
-
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                                    String msg = "O componente "+TipoMetrica+" foi excluido do servidor "+Servidor;
+                                    String titulo = "Exclusão de componente executada";
+                                    try {
+                                        Issue novaIssue = new Issue();
+                                        ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
 
                             } catch (ClassNotFoundException | SQLException ex) {
                                 Logger.getLogger(TelaConsultaComponente.class.getName()).log(Level.SEVERE, null, ex);

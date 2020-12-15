@@ -5,7 +5,7 @@ import java.util.*;
 public class Fields {
 
     private String summary;
-    private IssueField issuetype = new IssueField(10011L);
+    private IssueField issuetype = new IssueField(10002L);
     private IssueField project;
     private IssueField priority = new IssueField(2L);
     private Description description = new Description();

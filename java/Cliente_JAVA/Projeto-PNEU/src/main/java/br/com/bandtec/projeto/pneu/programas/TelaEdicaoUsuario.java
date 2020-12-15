@@ -363,18 +363,13 @@ public class TelaEdicaoUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário editado com sucesso");
                 
                 String msg = "O Usuário "+nomeUsuario+" foi editado.";
-                                        try {
-                                            Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Usuário foi editado");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                String titulo = "Edição de usuário executada";
+                try {
+                    Issue novaIssue = new Issue();
+                    ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
             
@@ -429,19 +424,14 @@ public class TelaEdicaoUsuario extends javax.swing.JFrame {
                         
                         JOptionPane.showMessageDialog(null,"Senha atualizada com sucesso!","Redefinição de senha!",JOptionPane.INFORMATION_MESSAGE);
                         
-                         String msg = "A senha do usuário "+nomeUsuario+" foi editada.";
-                                        try {
-                                            Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Senha de usuário foi editado");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                        String msg = "A senha do usuário "+nomeUsuario+" foi editada.";
+                        String titulo = "Edição de senha de usuário executada";
+                        try {
+                            Issue novaIssue = new Issue();
+                            ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                        } catch (IOException ex) {
+                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         
                         tfSenhaAtual.setText("");
                         tfNovaSenha.setText("");

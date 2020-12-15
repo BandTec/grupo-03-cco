@@ -93,8 +93,8 @@ public class TelaConsultaLocalizacao extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
-                .addComponent(btFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btFechar)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -132,7 +132,7 @@ public class TelaConsultaLocalizacao extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,15 +242,10 @@ public class TelaConsultaLocalizacao extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null,"A localização selecionada foi deletada","Localização deletada",JOptionPane.INFORMATION_MESSAGE);
                             
                             String msg = "A localização "+estado+" - "+cidade+", "+bairro+", "+rua+", "+numero+" foi deletada.";
+                            String titulo = "Exclusão de localização executada";
                             try {
                                 Issue novaIssue = new Issue();
-                                novaIssue.setProjectKey("BDJ");
-                                novaIssue.setSummary(msg);
-                                novaIssue.setDescription("Cadastro de localização foi executado");
-                                ConexaoAPIJira.criacao(novaIssue);
-                                
-                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                System.out.println("Issue criada: "+gson.toJson(novaIssue));
+                                ConexaoAPIJira.criacao(novaIssue, msg, titulo);
                             } catch (IOException ex) {
                                 Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
                             }

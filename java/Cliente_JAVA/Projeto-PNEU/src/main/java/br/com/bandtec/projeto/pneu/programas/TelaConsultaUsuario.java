@@ -94,8 +94,8 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
-                .addComponent(btFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btFechar)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -145,7 +145,7 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                         .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,18 +224,13 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso");
                 
                 String msg = "O usuário "+nome+" foi deletado.";
-                                        try {
-                                            Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Usuário foi deletado");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                String titulo = "Exclusão de usuário executada";
+                try {
+                    Issue novaIssue = new Issue();
+                    ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
             con.close();

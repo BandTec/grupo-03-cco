@@ -10,7 +10,7 @@ if [ $? = 0 ]
 
 
 
-then echo “Instalado”
+then echo “Não Instalado”
 
 	cd Cliente_JAVA/Projeto-PNEU/target
 
@@ -18,7 +18,7 @@ then echo “Instalado”
 
 
 
-else echo “Não instalado”
+else echo “Instalado”
 
         sudo apt install default-jdk
 

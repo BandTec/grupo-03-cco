@@ -14,9 +14,9 @@ public class ClienteJiraApi {
     private String token;
 
     /**
-     * Cria uma nova instância de {@link ClienteJiraApi}.
+     * Cria uma nova instÃ¢ncia de {@link ClienteJiraApi}.
      * @param urlBaseJira URL base do seu Jira. Ex: <b>meuapp.atlassian.net</b>
-     * @param usuario Seu usuário de acesso ao Jira
+     * @param usuario Seu usuÃ¡rio de acesso ao Jira
      * @param token Seu token de acesso ao Jira.
      *              Pode ser gerado em <a href='https://id.atlassian.com/manage-profile/security/api-tokens'>
      *              https://id.atlassian.com/manage-profile/security/api-tokens</a>
@@ -30,6 +30,7 @@ public class ClienteJiraApi {
     /**
     Cria um chamado (Issue) e, se tudo der certo, atualiza os "id" e "key" do objeto do tipo Issue enviado
     @param novaIssue Objeto com os dados do novo chamado (Issue)
+     * @throws java.io.IOException
      **/
     public void criarIssue(Issue novaIssue) throws IOException {
         Gson gson = new Gson();

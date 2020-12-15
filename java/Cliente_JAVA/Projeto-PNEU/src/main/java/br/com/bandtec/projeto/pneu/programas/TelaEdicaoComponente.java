@@ -227,8 +227,9 @@ public class TelaEdicaoComponente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        String tipoAntigo = lbSelecionado.getText();
+
         String[] separar = lbSelecionado.getText().split(": ");
+        String tipoAntigo = separar[1];
         String nomeServidor = separar[0];
         String[] separar2 = separar[1].split(" - ");
         String tipo = separar2[0];
@@ -290,19 +291,14 @@ public class TelaEdicaoComponente extends javax.swing.JFrame {
                         preparedStmt.executeUpdate();
                         JOptionPane.showMessageDialog(null, "Componente editado com sucesso");
                         
-                        String msg = "O componente "+tipoAntigo+" foi editado para "+novoTipo+".";
-                                        try {
-                                            Issue novaIssue = new Issue();
-                                            novaIssue.setProjectKey("BDJ");
-                                            novaIssue.setSummary(msg);
-                                            novaIssue.setDescription("Componente foi editado");
-                                            ConexaoAPIJira.criacao(novaIssue);
-
-                                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            System.out.println("Issue criada: "+gson.toJson(novaIssue));
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                        String msg = "O componente "+tipoAntigo+" do servidor "+nomeServidor+" foi editado para "+novoTipo+".";
+                        String titulo = "Edição de componente executada";
+                        try {
+                            Issue novaIssue = new Issue();
+                            ConexaoAPIJira.criacao(novaIssue, msg, titulo);
+                        } catch (IOException ex) {
+                            Logger.getLogger(TelaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     TelaConsultaComponente frameConsulta = new TelaConsultaComponente();
                     frameConsulta.setVisible(true);
