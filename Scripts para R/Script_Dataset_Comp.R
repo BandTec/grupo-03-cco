@@ -1,5 +1,0 @@
-par(mfrow = c(2,2), mar = c(2,2))
-barplot(dataset_comp$cpu, main = "Gráfico de uso de CPU", xlab = "Uso de CPU (%)", ylab = "Valor de leitura")
-hist(dataset_comp$ram, main = "Gráfico do uso de RAM", xlab = "Uso de RAM(GB)", ylab = "Frequência")
-barplot(dataset_comp$ram_percent, main = "Gráfico de uso de RAM", ylab = "Valor de leitura", xlab = "Uso de memória(%)")
-barplot(dataset_comp$disk_percent, main = "Gráfico de uso de Disco", ylab = "Valor de leitura", xlab = "Uso de disco(%)")
